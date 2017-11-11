@@ -17,7 +17,7 @@ public class PlayChess {
 	 */
 	public static void main(String[] args) {
 		
-		System.out.println( "Play chess: START" );
+		System.out.println( "Justmovechess. Play chess: START" );
 		
 		boolean uci = false;
 		
@@ -40,7 +40,7 @@ public class PlayChess {
 			+ " s."
 		);
 		
-		System.out.println( "Play chess: END" );
+		System.out.println( "Justmovechess. Play chess: END" );
 	}
 
 }
