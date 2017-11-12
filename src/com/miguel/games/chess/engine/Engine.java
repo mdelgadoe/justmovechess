@@ -47,10 +47,9 @@ public class Engine extends com.miguel.games.entities.Engine {
 			position.getTurn();
 		
 		//
-		// Iterative deepening, after movement number 3, beginning to search
-		// for mates
+		// Iterative deepening
 		// 
-		// We search first 1 ply, then 2 plies, 3 plies, and so on. We will get
+		// We search first x plies, then x+1 plies, x+2 plies, and so on. We will get
 		// the best movement from the deepest search, unless we find a mate. In
 		// this case, we execute the movement that could lead to mate
 		//
@@ -65,6 +64,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 			// To achieve a fluid game pace combined with effectiveness, specially for testing, the number of plies to
 			// search should depend on the number of pieces still on the board. The less pieces on the board, the deeper
 			// the search can be.
+			//
 			// TODO: mix this concept with available time to move
 			//
 			int maxPliesToSearch = howManyPliesToSearch( position );
@@ -91,7 +91,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 						pliesToSearch,
 						principalVariationMovement
 					);
-				
+								
 				System.out.println( pliesToSearch + " plies analysis finished." );			
 				
 				if (
@@ -139,13 +139,12 @@ public class Engine extends com.miguel.games.entities.Engine {
 				position.setKingChecked( false );
 			}
 			
+			if ( justMoveChessEngineMovement ) {
+				System.out.println( "bestmove " + movement.toUCIString() );
+			}
 		}
 		else {
 			result = false; 
-		}
-		
-		if ( justMoveChessEngineMovement ) {
-			System.out.println( "bestmove " + movement.toUCIString() );
 		}
 		
 		return result;
