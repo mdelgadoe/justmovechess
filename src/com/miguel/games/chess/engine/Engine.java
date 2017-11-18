@@ -69,10 +69,6 @@ public class Engine extends com.miguel.games.entities.Engine {
 			//
 			int maxPliesToSearch = howManyPliesToSearch( position );
 			
-			if ( dontPayAttentionToAnythingElseAndTestEngineVersusItself ) {
-				pliesToSearch = ( colourInTurn == Constants.WHITE_COLOUR ) ? 5 : 2;
-			}
-		
 			System.out.println( "Number of plies to begin with: " + pliesToSearch );
 			System.out.println( "Maximum number of plies to analyze: " + maxPliesToSearch );
 			
@@ -166,8 +162,8 @@ public class Engine extends com.miguel.games.entities.Engine {
 		// Instead of using the number of pieces, with our implementation, it is faster to decide depending
 		// on the number of free squares. The more free squares, the less pieces on the board
 		//
-		int numberOfFreeSquaresOnTheBoard =
-			position.getBoard().getFreeSquares().size();
+		//		int numberOfFreeSquaresOnTheBoard =
+		//			position.getBoard().getFreeSquares().size();
 		
 		//
 		// Searching is still too slow to take it any deeper
@@ -187,12 +183,12 @@ public class Engine extends com.miguel.games.entities.Engine {
 		//		else if ( etc etc etc ) {
 		//		}
 		
-		if ( numberOfFreeSquaresOnTheBoard > 48 ) {
-			result = 8;
-		}
-		else if ( numberOfFreeSquaresOnTheBoard > 40 ) {
-			result = 7;
-		}
+		//		if ( numberOfFreeSquaresOnTheBoard > 48 ) {
+		//			result = 8;
+		//		}
+		//		else if ( numberOfFreeSquaresOnTheBoard > 40 ) {
+		//			result = 7;
+		//		}
 				
 		return result;
 	}
@@ -1263,9 +1259,12 @@ public class Engine extends com.miguel.games.entities.Engine {
 						}
 						
 						//
-						// TODO: passed pawns. Take into account that we are already giving points to advanced pawns.
-						// Think carefully about
+						// Passed pawns, taking into account that we are already giving points to advanced pawns.
 						//
+						// TODO: uncomment below and code this method
+//						if ( board.isPassedPawn( ( Pawn )piece ) ) {
+//							whiteHeuristicValue = whiteHeuristicValue + Constants.PASSED_PAWN;
+//						}
 					}
 				}
 				else if (
@@ -1540,9 +1539,12 @@ public class Engine extends com.miguel.games.entities.Engine {
 						}
 						
 						//
-						// TODO: passed pawns. Take into account that we are already giving points to advanced pawns.
-						// Think carefully about it
+						// Passed pawns, taking into account that we are already giving points to advanced pawns.
 						//
+						// TODO: uncomment below and code this method
+//						if ( board.isPassedPawn( ( Pawn )piece ) ) {
+//							blackHeuristicValue = blackHeuristicValue + Constants.PASSED_PAWN;
+//						}
 					}
 				}
 				else if (
