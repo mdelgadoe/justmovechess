@@ -45,9 +45,18 @@ public final class Constants {
 	public final static int KING_VALUE = 20000;
 	public final static int QUEEN_VALUE = 1000;
 	public final static int ROOK_VALUE = 525;
-	public final static int BISHOP_VALUE = 350;
+	public final static int BISHOP_VALUE = 360;
 	public final static int KNIGHT_VALUE = 350;
 	public final static int PAWN_VALUE = 100;
+	
+	//
+	// Endings: pieces values
+	//
+	public final static int ENDINGS_QUEEN_VALUE = 1002;
+	public final static int ENDINGS_ROOK_VALUE = 527;
+	public final static int ENDINGS_BISHOP_VALUE = 362;
+	public final static int ENDINGS_KNIGHT_VALUE = 355;
+	public final static int ENDINGS_PAWN_VALUE = 120;
 	
 	public final static int OPENING_LIMIT_FULL_MOVE_COUNTER = 14;
 	public final static int MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER = 45;
@@ -77,6 +86,7 @@ public final class Constants {
 	public static final int KNIGHT_ATTACKING_ANY_OF_THE_CENTRAL_SQUARES_DURING_OPENING = 15;
 	public static final int BISHOP_ATTACKING_ANY_OF_THE_CENTRAL_SQUARES_DURING_OPENING = 10;
 	public static final int ROOK_ATTACKING_ANY_OF_THE_CENTRAL_SQUARES_DURING_OPENING = 5;
+	public static final int PASSED_PAWN = 45;
 	
 	// Negative circumstances
 	public final static int NOT_CASTLED_KING_AND_IMPOSSIBLE_TO_CASTLE_OPENING_AND_MIDDLE_GAME = 60;
