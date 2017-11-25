@@ -9,8 +9,8 @@ package com.miguel.games.entities;
  */
 public abstract class Movement {
 
-	private Square squareStart;
-	private Square squareEnd;
+	private int squareStartId;
+	private int squareEndId;
 	private Piece piece;
 	
 	public Piece getPiece() {
@@ -19,17 +19,17 @@ public abstract class Movement {
 	public void setPiece(Piece piece) {
 		this.piece = piece;
 	}
-	public Square getSquareStart() {
-		return squareStart;
+	public int getSquareStartId() {
+		return squareStartId;
 	}
-	public void setSquareStart(Square squareStart) {
-		this.squareStart = squareStart;
+	public void setSquareStartId(int squareStartId) {
+		this.squareStartId = squareStartId;
 	}
-	public Square getSquareEnd() {
-		return squareEnd;
+	public int getSquareEndId() {
+		return squareEndId;
 	}
-	public void setSquareEnd(Square squareEnd) {
-		this.squareEnd = squareEnd;
+	public void setSquareEndId(int squareEndId) {
+		this.squareEndId = squareEndId;
 	}
 	
 }

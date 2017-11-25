@@ -30,12 +30,14 @@ public class Knight extends Piece {
 	}
 	
 	@Override
-	public int getHeuristicValue() {
-		return Constants.KNIGHT_VALUE;
+	public int getHeuristicValue( int fullMoveCounter ) {
+		return
+			( fullMoveCounter <= Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER ) ?
+			Constants.KNIGHT_VALUE : Constants.ENDINGS_KNIGHT_VALUE;
 	}
 	
 	@Override
-	public boolean isAttackingSquare(Square square, Board board) {
+	public boolean isAttackingSquareId(int squareId, Board board) {
 		
 		//
 		// A knight attacks every square reachable with an L-movement, in 
@@ -44,9 +46,9 @@ public class Knight extends Piece {
 		//
 		
 		return
-			board.existsLMovementBetweenSquares(
-				this.getSquare(),
-				square
+			board.existsLMovementBetweenSquaresIds(
+				this.getSquareId(),
+				squareId
 			);
 		
 	}
@@ -64,14 +66,16 @@ public class Knight extends Piece {
 			position.getBoard();
 		
 		int knightSquareId =
-			this.getSquare().getId();
+			this.getSquareId();
+		
+		int fullMoveCounter = position.getFullMoveCounter();
 		
 		//
 		// Normal knight's movements
 		//		
-		ArrayList<Square> knightMovementsEndSquares =
-			board.getKnightMovementEndSquares(
-				this.getSquare(),
+		ArrayList<Integer> knightMovementsEndSquares =
+			board.getKnightMovementEndSquaresIds(
+				this.getSquareId(),
 				this.getColour()
 			);
 		
@@ -87,18 +91,18 @@ public class Knight extends Piece {
 		//
 		
 		for ( 
-			Iterator<Square> iter = knightMovementsEndSquares.iterator();
+			Iterator<Integer> iter = knightMovementsEndSquares.iterator();
 			iter.hasNext();
 		) {
-			Square square = iter.next();
+			int squareId = iter.next();
 			
 			//
 			// We build the movement
 			//
 			Movement movement = new Movement();
 			
-			movement.setSquareStart( new Square( knightSquareId ) );
-			movement.setSquareEnd( square );
+			movement.setSquareStartId( knightSquareId );
+			movement.setSquareEndId( squareId );
 			movement.setPiece( this );
 			movement.setFormerHalfMoveClock(
 				position.getHalfMoveClock()
@@ -116,20 +120,20 @@ public class Knight extends Piece {
 				position.isBlackLongCastleAllowed()
 			);
 			
-			if ( ! board.isFreeSquare( square ) ) {
+			if ( ! board.isFreeSquareId( squareId ) ) {
 				
 				movement.setCapture( true );
 				
 				movement.setCapturedPiece(
-					board.getPieceByColourAndSquare(
+					board.getPieceByColourAndSquareId(
 						rivalColour,
-						square
+						squareId
 					)
 				);
 				
 				movement.setOrder(
-					Constants.GENERIC_CAPTURE_ORDER - movement.getCapturedPiece().getHeuristicValue()
-					+ this.getHeuristicValue()
+					Constants.GENERIC_CAPTURE_ORDER - movement.getCapturedPiece().getHeuristicValue( fullMoveCounter )
+					+ this.getHeuristicValue( fullMoveCounter )
 				);
 			}
 			else {
@@ -138,9 +142,9 @@ public class Knight extends Piece {
 			
 			if (
 				principalVariationMovement != null
-				&& movement.isAMovementDefinedByStartAndEndSquares(
-					( Square )( principalVariationMovement.getSquareStart() ),
-					( Square )( principalVariationMovement.getSquareEnd() ),
+				&& movement.isAMovementDefinedByStartAndEndSquaresIds(
+					principalVariationMovement.getSquareStartId(),
+					principalVariationMovement.getSquareEndId(),
 					principalVariationMovement.getPromotionChoicePiece()
 				)
 			) {

@@ -13,7 +13,6 @@ import com.miguel.games.chess.entities.Piece;
 import com.miguel.games.chess.entities.Position;
 import com.miguel.games.chess.entities.Queen;
 import com.miguel.games.chess.entities.Rook;
-import com.miguel.games.chess.entities.Square;
 import com.miguel.games.chess.utils.AlgebraicNotationUtils;
 
 public class FenUtilities {
@@ -92,11 +91,9 @@ public class FenUtilities {
 		//
 		if ( ! enPassantTargetString.equals( "-" ) ) {
 			
-			result.setEnPassantTarget(
-				new Square(
-					AlgebraicNotationUtils.coordinatesToSquareId(
-						enPassantTargetString
-					)
+			result.setEnPassantTargetId(
+				AlgebraicNotationUtils.coordinatesToSquareId(
+					enPassantTargetString
 				)
 			);
 		}

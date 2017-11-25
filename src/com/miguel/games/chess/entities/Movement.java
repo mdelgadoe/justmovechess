@@ -35,8 +35,8 @@ public class Movement extends com.miguel.games.entities.Movement {
 	// implied rook itself
 	//
 	private boolean castle;
-	private Square rookSquareStart;
-	private Square rookSquareEnd;
+	private int rookSquareStartId;
+	private int rookSquareEndId;
 	private Rook castledRook;
 	
 	//
@@ -59,7 +59,7 @@ public class Movement extends com.miguel.games.entities.Movement {
 	// to the actual enPassantTarget
 	//
 	private boolean inEnPassantSituationMovement;
-	private Square formerEnPassantTarget;
+	private int formerEnPassantTargetId;
 	
 	//
 	// promotedPawn is true if the movement is a pawn promotion. If that is the case,
@@ -87,25 +87,23 @@ public class Movement extends com.miguel.games.entities.Movement {
 	
 	public void visualize() {
 		
-		Square squareStart =
-			( Square )( this.getSquareStart() );
+		int squareStartId = this.getSquareStartId();
 		
-		Square squareEnd =
-			( Square )( this.getSquareEnd() );
+		int squareEndId = this.getSquareEndId();
 		
 		System.out.println( 
 			"Movement: " 
 			+ this.getPiece().toString() 
 			+ ". " 
-			+ squareStart 
+			+ squareStartId 
 			+ " - " 
-			+ squareEnd
+			+ squareEndId
 			+ ". "
 			+ AlgebraicNotationUtils.squareIdToCoordinates(
-				squareStart.getId()
+				squareStartId
 			)
 			+ AlgebraicNotationUtils.squareIdToCoordinates(
-				squareEnd.getId()
+				squareEndId
 			)
 		);
 		
@@ -114,7 +112,7 @@ public class Movement extends com.miguel.games.entities.Movement {
 				"0-0 or 0-0-0. Check above and below squares to decide by yourself." 
 			);
 			System.out.println( 
-				"Rook: " + this.rookSquareStart + " - " + this.rookSquareEnd
+				"Rook: " + this.rookSquareStartId + " - " + this.rookSquareEndId
 			);
 		}
 		else if ( this.promotedPawn ) {
@@ -139,8 +137,8 @@ public class Movement extends com.miguel.games.entities.Movement {
 		// Promotions are represented adding the promotion piece choice ( e.g. e7e8q )
 		//
 		String result =
-			AlgebraicNotationUtils.squareIdToCoordinates( ( ( Square )( this.getSquareStart() ) ).getId() )
-			+ AlgebraicNotationUtils.squareIdToCoordinates( ( ( Square )( this.getSquareEnd() ) ).getId() );
+			AlgebraicNotationUtils.squareIdToCoordinates( this.getSquareStartId() )
+			+ AlgebraicNotationUtils.squareIdToCoordinates( this.getSquareEndId() );
 		
 		if ( this.promotedPawn ) {
 			result = result + this.promotionChoicePiece.toUCIString();
@@ -181,20 +179,20 @@ public class Movement extends com.miguel.games.entities.Movement {
 		this.castle = castle;
 	}
 
-	public Square getRookSquareStart() {
-		return rookSquareStart;
+	public int getRookSquareStartId() {
+		return rookSquareStartId;
 	}
 
-	public void setRookSquareStart(Square rookSquareStart) {
-		this.rookSquareStart = rookSquareStart;
+	public void setRookSquareStartId(int rookSquareStartId) {
+		this.rookSquareStartId = rookSquareStartId;
 	}
 
-	public Square getRookSquareEnd() {
-		return rookSquareEnd;
+	public int getRookSquareEndId() {
+		return rookSquareEndId;
 	}
 
-	public void setRookSquareEnd(Square rookSquareEnd) {
-		this.rookSquareEnd = rookSquareEnd;
+	public void setRookSquareEndId(int rookSquareEndId) {
+		this.rookSquareEndId = rookSquareEndId;
 	}
 
 	public Rook getCastledRook() {
@@ -222,12 +220,12 @@ public class Movement extends com.miguel.games.entities.Movement {
 		this.inEnPassantSituationMovement = inEnPassantSituationMovement;
 	}
 
-	public Square getFormerEnPassantTarget() {
-		return formerEnPassantTarget;
+	public int getFormerEnPassantTargetId() {
+		return formerEnPassantTargetId;
 	}
 
-	public void setFormerEnPassantTarget(Square formerEnPassantTarget) {
-		this.formerEnPassantTarget = formerEnPassantTarget;
+	public void setFormerEnPassantTargetId(int formerEnPassantTargetId) {
+		this.formerEnPassantTargetId = formerEnPassantTargetId;
 	}
 
 	public boolean isPromotedPawn() {
@@ -314,19 +312,16 @@ public class Movement extends com.miguel.games.entities.Movement {
 		int startSquareId = AlgebraicNotationUtils.coordinatesToSquareId( startSquareAlgebraicNotation );
 		int endSquareId = AlgebraicNotationUtils.coordinatesToSquareId( endSquareAlgebraicNotation );
 		
-		Square startSquare = ( Square )( this.getSquareStart() );
-		Square endSquare = ( Square )( this.getSquareEnd() );
-		
 		if ( promotionChoice.length() == 0 ) {
 			result = (
-				startSquare.getId() == startSquareId
-				&& endSquare.getId() == endSquareId
+				startSquareId == this.getSquareStartId()
+				&& endSquareId == this.getSquareEndId()
 			);
 		}
 		else {
 			result = (
-				startSquare.getId() == startSquareId
-				&& endSquare.getId() == endSquareId
+				startSquareId == this.getSquareStartId()
+				&& endSquareId == this.getSquareEndId()
 				&& this.promotionChoicePiece.toUCIString().equals( promotionChoice )
 			);
 		}
@@ -334,23 +329,23 @@ public class Movement extends com.miguel.games.entities.Movement {
 		return result;
 	}
 	
-	public boolean isAMovementDefinedByStartAndEndSquares(
-		Square startSquare,
-		Square endSquare,
+	public boolean isAMovementDefinedByStartAndEndSquaresIds(
+		int startSquareId,
+		int endSquareId,
 		Piece promotionChoicePiece
 	) {
 		boolean result = false;
 		
 		if ( promotionChoicePiece == null ) {
 			result = (
-				startSquare.getId() == ( ( Square )( this.getSquareStart() ) ).getId()
-				&& endSquare.getId() == ( ( Square )( this.getSquareEnd() ) ).getId()
+				startSquareId == this.getSquareStartId()
+				&& endSquareId == this.getSquareEndId()
 			);
 		}
 		else if ( this.promotionChoicePiece != null ) {
 			result = (
-				startSquare.getId() == ( ( Square )( this.getSquareStart() ) ).getId()
-				&& endSquare.getId() == ( ( Square )( this.getSquareEnd() ) ).getId()
+				startSquareId == this.getSquareStartId()
+				&& endSquareId == this.getSquareEndId()
 				&& promotionChoicePiece.toUCIString().equals( this.promotionChoicePiece.toUCIString() )
 			);
 		}

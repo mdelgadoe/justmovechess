@@ -32,12 +32,14 @@ public class Rook extends Piece {
 	}
 	
 	@Override
-	public int getHeuristicValue() {
-		return Constants.ROOK_VALUE;
+	public int getHeuristicValue( int fullMoveCounter ) {
+		return
+			( fullMoveCounter <= Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER ) ?
+			Constants.ROOK_VALUE : Constants.ENDINGS_ROOK_VALUE;
 	}
 	
 	@Override
-	public boolean isAttackingSquare(Square square, Board board) {
+	public boolean isAttackingSquareId(int squareId, Board board) {
 		
 		//
 		// A rook attacks every square in its same row and column, in 
@@ -50,9 +52,9 @@ public class Rook extends Piece {
 		// and the squares between them are empty
 		//
 		return
-			board.emptyRowOrColumnBetweenSquares(
-				this.getSquare(),
-				square
+			board.emptyRowOrColumnBetweenSquaresIds(
+				this.getSquareId(),
+				squareId
 			);
 		
 	}
@@ -70,17 +72,19 @@ public class Rook extends Piece {
 			position.getBoard();
 		
 		int rookSquareId =
-			this.getSquare().getId();
+			this.getSquareId();
 		
 		boolean rookMoved =
 			this.isMoved();
 		
+		int fullMoveCounter = position.getFullMoveCounter();
+		
 		//
 		// Normal rook's movements
 		//		
-		ArrayList<Square> rookMovementsEndSquares =
-			board.getRookMovementEndSquares(
-				this.getSquare(),
+		ArrayList<Integer> rookMovementsEndSquares =
+			board.getRookMovementEndSquaresIds(
+				this.getSquareId(),
 				this.getColour()
 			);
 		
@@ -96,18 +100,18 @@ public class Rook extends Piece {
 		//
 		
 		for ( 
-			Iterator<Square> iter = rookMovementsEndSquares.iterator();
+			Iterator<Integer> iter = rookMovementsEndSquares.iterator();
 			iter.hasNext();
 		) {
-			Square square = iter.next();
+			int squareId = iter.next();
 			
 			//
 			// We build the movement
 			//
 			Movement movement = new Movement();
 			
-			movement.setSquareStart( new Square( rookSquareId ) );
-			movement.setSquareEnd( square );
+			movement.setSquareStartId( rookSquareId );
+			movement.setSquareEndId( squareId );
 			movement.setPiece( this );
 			movement.setFormerHalfMoveClock(
 				position.getHalfMoveClock()
@@ -128,20 +132,20 @@ public class Rook extends Piece {
 				position.isBlackLongCastleAllowed()
 			);
 			
-			if ( ! board.isFreeSquare( square ) ) {
+			if ( ! board.isFreeSquareId( squareId ) ) {
 				
 				movement.setCapture( true );
 				
 				movement.setCapturedPiece(
-					board.getPieceByColourAndSquare(
+					board.getPieceByColourAndSquareId(
 						rivalColour,
-						square
+						squareId
 					)
 				);
 				
 				movement.setOrder(
-					Constants.GENERIC_CAPTURE_ORDER - movement.getCapturedPiece().getHeuristicValue()
-					+ this.getHeuristicValue()
+					Constants.GENERIC_CAPTURE_ORDER - movement.getCapturedPiece().getHeuristicValue( fullMoveCounter )
+					+ this.getHeuristicValue( fullMoveCounter )
 				);
 			}
 			else {
@@ -150,9 +154,9 @@ public class Rook extends Piece {
 			
 			if (
 				principalVariationMovement != null
-				&& movement.isAMovementDefinedByStartAndEndSquares(
-					( Square )( principalVariationMovement.getSquareStart() ),
-					( Square )( principalVariationMovement.getSquareEnd() ),
+				&& movement.isAMovementDefinedByStartAndEndSquaresIds(
+					principalVariationMovement.getSquareStartId(),
+					principalVariationMovement.getSquareEndId(),
 					principalVariationMovement.getPromotionChoicePiece()
 				)
 			) {

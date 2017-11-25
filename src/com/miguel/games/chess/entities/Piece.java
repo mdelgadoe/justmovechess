@@ -12,17 +12,17 @@ import java.util.ArrayList;
 public abstract class Piece extends com.miguel.games.entities.Piece {
 	
 	private int colour;
-	private Square square;
+	private int squareId;
 	
 	public Piece(int colour, int squareId) {
 		super();
 		this.colour = colour;
-		this.square = new Square( squareId );
+		this.squareId = squareId;
 	}
 	
-	public abstract int getHeuristicValue();
+	public abstract int getHeuristicValue( int fullMoveCounter );
 	
-	public abstract boolean isAttackingSquare( Square square, Board board );
+	public abstract boolean isAttackingSquareId( int squareId, Board board );
 	
 	public abstract ArrayList<Movement> getLegalMovements( Position position, Movement principalVariationMovement );
 	
@@ -34,11 +34,11 @@ public abstract class Piece extends com.miguel.games.entities.Piece {
 	public void setColour(int colour) {
 		this.colour = colour;
 	}
-	public Square getSquare() {
-		return square;
+	public int getSquareId() {
+		return squareId;
 	}
-	public void setSquare(Square square) {
-		this.square = square;
+	public void setSquareId(int squareId) {
+		this.squareId = squareId;
 	}
 
 }

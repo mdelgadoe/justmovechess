@@ -59,7 +59,7 @@ public final class Constants {
 	public final static int ENDINGS_PAWN_VALUE = 120;
 	
 	public final static int OPENING_LIMIT_FULL_MOVE_COUNTER = 14;
-	public final static int MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER = 45;
+	public final static int MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER = 40;
 	
 	//
 	// Special values for special circumstances
@@ -73,20 +73,20 @@ public final class Constants {
 	public final static int SIXTH_ROW_ADVANCED_PAWN = 15;
 	public final static int CENTRALIZED_PIECE_FIRST_CLASS = 45;
 	public final static int CENTRALIZED_PIECE_SECOND_CLASS = 20;
-	public final static int DEVELOPED_MEDIUM_WEIGHT_PIECE_DURING_OPENING = 40;
-	public final static int BISHOPS_PAIR_WITH_MANY_PIECES_ON_THE_BOARD = 10;
-	public final static int BISHOPS_PAIR_WITH_FEW_PIECES_ON_THE_BOARD = 20;
+	public final static int DEVELOPED_MEDIUM_WEIGHT_PIECE_DURING_OPENING = 45;
+	public final static int BISHOPS_PAIR_WITH_MANY_PIECES_ON_THE_BOARD = 15;
+	public final static int BISHOPS_PAIR_WITH_FEW_PIECES_ON_THE_BOARD = 25;
 	public final static int BISHOPS_PAIR_MATERIAL_ON_THE_BOARD_BOUND = 16;
 	public final static int KNIGHT_NOT_ON_A_OR_H_COLUMNS_DURING_THE_OPENING_AND_MIDDLE_GAME = 20;
 	public final static int KING_NOT_WEIRDLY_AND_SURELY_TOO_EARLY_MOVED = 30;
 	public final static int RIVAL_KING_CHECKED_OPENING_AND_MIDDLE_GAME = 15;
 	public final static int RIVAL_KING_CHECKED_ENDING = 25;
 	public final static int ROOK_ON_ITS_SEVENTH_ROW_AND_RIVAL_KING_ON_THE_EIGHTH_ROW = 30;
-	public final static int ROOKS_CONNECTED_ON_THE_FIRST_ROW = 20;
+	public final static int ROOKS_CONNECTED_ON_THE_FIRST_ROW = 35;
 	public static final int KNIGHT_ATTACKING_ANY_OF_THE_CENTRAL_SQUARES_DURING_OPENING = 15;
 	public static final int BISHOP_ATTACKING_ANY_OF_THE_CENTRAL_SQUARES_DURING_OPENING = 10;
-	public static final int ROOK_ATTACKING_ANY_OF_THE_CENTRAL_SQUARES_DURING_OPENING = 5;
-	public static final int PASSED_PAWN = 45;
+	public static final int ROOK_ATTACKING_ANY_OF_THE_CENTRAL_SQUARES_DURING_OPENING = 6;
+	public static final int CANDIDATE_PASSED_PAWN = 10;
 	
 	// Negative circumstances
 	public final static int NOT_CASTLED_KING_AND_IMPOSSIBLE_TO_CASTLE_OPENING_AND_MIDDLE_GAME = 60;

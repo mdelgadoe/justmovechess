@@ -69,11 +69,9 @@ public class AlgebraicNotationUtils {
 		// This method returns the algebraic chess coordinate that corresponds
 		// to the squareId received
 		//
-		int row =
-			squareId / 8 + 1;
+		int row = ( squareId / 8 ) + 1;
 		
-		int column =
-			squareId % 8;
+		int column = squareId % 8;
 		
 		String columnString = "";
 		

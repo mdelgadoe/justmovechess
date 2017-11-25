@@ -33,19 +33,19 @@ public class King extends Piece {
 	}
 	
 	@Override
-	public int getHeuristicValue() {
-		return Constants.KING_VALUE;
+	public int getHeuristicValue( int fullMoveCounter ) {
+		return Constants.KING_VALUE;  // King value does not change during the game
 	}
 
 	@Override
-	public boolean isAttackingSquare(Square square, Board board) {
+	public boolean isAttackingSquareId(int squareId, Board board) {
 		
 		//
 		// A king attacks every adjacent square, in every direction
 		//
-		return board.areAdjacentSquares( 
-			this.getSquare(),
-			square
+		return board.areAdjacentSquaresIds( 
+			this.getSquareId(),
+			squareId
 		);
 	}
 
@@ -61,10 +61,12 @@ public class King extends Piece {
 			position.getBoard();
 		
 		int kingSquareId =
-			this.getSquare().getId();
+			this.getSquareId();
 		
 		boolean kingMoved =
 			this.isMoved();
+		
+		int fullMoveCounter = position.getFullMoveCounter();
 		
 		//
 		// Short castle movement
@@ -79,9 +81,9 @@ public class King extends Piece {
 			 
 			if (
 				principalVariationMovement != null
-				&& movement.isAMovementDefinedByStartAndEndSquares(
-					( Square )( principalVariationMovement.getSquareStart() ),
-					( Square )( principalVariationMovement.getSquareEnd() ),
+				&& movement.isAMovementDefinedByStartAndEndSquaresIds(
+					principalVariationMovement.getSquareStartId(),
+					principalVariationMovement.getSquareEndId(),
 					principalVariationMovement.getPromotionChoicePiece()
 				)
 			) {
@@ -108,9 +110,9 @@ public class King extends Piece {
 			
 			if (
 				principalVariationMovement != null
-				&& movement.isAMovementDefinedByStartAndEndSquares(
-					( Square )( principalVariationMovement.getSquareStart() ),
-					( Square )( principalVariationMovement.getSquareEnd() ),
+				&& movement.isAMovementDefinedByStartAndEndSquaresIds(
+					principalVariationMovement.getSquareStartId(),
+					principalVariationMovement.getSquareEndId(),
 					principalVariationMovement.getPromotionChoicePiece()
 				)
 			) {
@@ -128,9 +130,9 @@ public class King extends Piece {
 		//
 		// Normal king's movements
 		//		
-		ArrayList<Square> kingMovementsEndSquares =
-			board.getKingMovementEndSquares(
-				this.getSquare(),
+		ArrayList<Integer> kingMovementsEndSquares =
+			board.getKingMovementEndSquaresIds(
+				this.getSquareId(),
 				this.getColour()
 			);
 		
@@ -146,18 +148,18 @@ public class King extends Piece {
 		//
 		
 		for ( 
-			Iterator<Square> iter = kingMovementsEndSquares.iterator();
+			Iterator<Integer> iter = kingMovementsEndSquares.iterator();
 			iter.hasNext();
 		) {
-			Square square = iter.next();
+			int squareId = iter.next();
 			
 			//
 			// We build the movement
 			//
 			Movement movement = new Movement();
 			
-			movement.setSquareStart( new Square( kingSquareId ) );
-			movement.setSquareEnd( square );
+			movement.setSquareStartId( kingSquareId );
+			movement.setSquareEndId( squareId );
 			movement.setPiece( this );
 			movement.setFormerHalfMoveClock(
 				position.getHalfMoveClock()
@@ -178,20 +180,20 @@ public class King extends Piece {
 				position.isBlackLongCastleAllowed()
 			);
 			
-			if ( ! board.isFreeSquare( square ) ) {
+			if ( ! board.isFreeSquareId( squareId ) ) {
 				
 				movement.setCapture( true );
 				
 				movement.setCapturedPiece(
-					board.getPieceByColourAndSquare(
+					board.getPieceByColourAndSquareId(
 						rivalColour,
-						square
+						squareId
 					)
 				);
 				
 				movement.setOrder(
-					Constants.GENERIC_CAPTURE_ORDER - movement.getCapturedPiece().getHeuristicValue()
-					+ this.getHeuristicValue()
+					Constants.GENERIC_CAPTURE_ORDER - movement.getCapturedPiece().getHeuristicValue( fullMoveCounter )
+					+ this.getHeuristicValue( fullMoveCounter )
 				);
 			}
 			else {
@@ -200,9 +202,9 @@ public class King extends Piece {
 			
 			if (
 				principalVariationMovement != null
-				&& movement.isAMovementDefinedByStartAndEndSquares(
-					( Square )( principalVariationMovement.getSquareStart() ),
-					( Square )( principalVariationMovement.getSquareEnd() ),
+				&& movement.isAMovementDefinedByStartAndEndSquaresIds(
+					principalVariationMovement.getSquareStartId(),
+					principalVariationMovement.getSquareEndId(),
 					principalVariationMovement.getPromotionChoicePiece()
 				)
 			) {

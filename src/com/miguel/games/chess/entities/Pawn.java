@@ -30,20 +30,22 @@ public class Pawn extends Piece {
 	}
 	
 	@Override
-	public int getHeuristicValue() {
-		return Constants.PAWN_VALUE;
+	public int getHeuristicValue( int fullMoveCounter ) {
+		return
+			( fullMoveCounter <= Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER ) ?
+			Constants.PAWN_VALUE : Constants.ENDINGS_PAWN_VALUE;
 	}
 
 	@Override
-	public boolean isAttackingSquare(Square square, Board board) {
+	public boolean isAttackingSquareId(int squareId, Board board) {
 		
 		//
 		// A pawn attacks every diagonal adjacent square, in ist natural
 		// advance direction (which depends of course on the colour of the pawn)
 		//
-		return board.areDiagonalAdjacentSquaresWithDirection( 
-			this.getSquare(), 
-			square,
+		return board.areDiagonalAdjacentSquaresIdsWithDirection( 
+			this.getSquareId(), 
+			squareId,
 			this.getColour()
 		);
 	}
@@ -61,7 +63,7 @@ public class Pawn extends Piece {
 			position.getBoard();
 		
 		int pawnSquareId =
-			this.getSquare().getId();
+			this.getSquareId();
 		
 		int pawnColour = 
 			this.getColour();
@@ -69,17 +71,16 @@ public class Pawn extends Piece {
 		int pawnColumn =
 			pawnSquareId % 8;
 		
+		int fullMoveCounter = position.getFullMoveCounter();
+		
 		//
 		// Generate enPassant capture movement, if it is possible
 		//
 		
-		Square enPassantTarget =
-			position.getEnPassantTarget();
+		int enPassantTargetId =
+			position.getEnPassantTargetId();
 		
-		if ( enPassantTarget != null ) {
-			
-			int enPassantTargetSquareId =
-				enPassantTarget.getId();
+		if ( enPassantTargetId != 0 ) {
 			
 			int addValueLeftDiagonalAdvance =
 				( pawnColour == Constants.WHITE_COLOUR )
@@ -94,12 +95,12 @@ public class Pawn extends Piece {
 			if (
 				(
 					pawnColumn > 0
-					&& enPassantTargetSquareId == pawnSquareId + addValueLeftDiagonalAdvance
+					&& enPassantTargetId == pawnSquareId + addValueLeftDiagonalAdvance
 				)
 				||
 				(
 					pawnColumn < 7
-					&& enPassantTargetSquareId == pawnSquareId + addValueRightDiagonalAdvance
+					&& enPassantTargetId == pawnSquareId + addValueRightDiagonalAdvance
 				)
 			) {
 				
@@ -124,9 +125,9 @@ public class Pawn extends Piece {
 					
 					if (
 						principalVariationMovement != null
-						&& enPassantMovement.isAMovementDefinedByStartAndEndSquares(
-							( Square )( principalVariationMovement.getSquareStart() ),
-							( Square )( principalVariationMovement.getSquareEnd() ),
+						&& enPassantMovement.isAMovementDefinedByStartAndEndSquaresIds(
+							principalVariationMovement.getSquareStartId(),
+							principalVariationMovement.getSquareEndId(),
 							principalVariationMovement.getPromotionChoicePiece()
 						)
 					) {
@@ -150,9 +151,9 @@ public class Pawn extends Piece {
 		//
 		// Normal pawn's movements
 		//		
-		ArrayList<Square> pawnMovementsEndSquares =
-			board.getPawnMovementEndSquares(
-				this.getSquare(),
+		ArrayList<Integer> pawnMovementsEndSquares =
+			board.getPawnMovementEndSquaresIds(
+				this.getSquareId(),
 				this.getColour()
 			);
 		
@@ -170,19 +171,18 @@ public class Pawn extends Piece {
 		int promotionChoiceIndex = 0;
 		
 		for ( 
-			Iterator<Square> iter = pawnMovementsEndSquares.iterator();
+			Iterator<Integer> iter = pawnMovementsEndSquares.iterator();
 			iter.hasNext();
 		) {
-			Square square = iter.next();
-			int squareId = square.getId();
+			int squareId = iter.next();
 			
 			//
 			// We build the movement
 			//
 			Movement movement = new Movement();
 			
-			movement.setSquareStart( new Square( pawnSquareId ) );
-			movement.setSquareEnd( square );
+			movement.setSquareStartId( pawnSquareId );
+			movement.setSquareEndId( squareId );
 			movement.setPiece( this );
 			movement.setFormerHalfMoveClock(
 				position.getHalfMoveClock()
@@ -200,21 +200,23 @@ public class Pawn extends Piece {
 				position.isBlackLongCastleAllowed()
 			);
 			
-			if ( ! board.isFreeSquare( square ) ) {
+			if ( ! board.isFreeSquareId( squareId ) ) {
 				//
 				// Pawn doing a normal capture movement
 				//
 				movement.setCapture( true );
 				
 				movement.setCapturedPiece(
-					board.getPieceByColourAndSquare(
+					board.getPieceByColourAndSquareId(
 						rivalColour,
-						square
+						squareId
 					)
 				);
 				
 				movement.setOrder(
-					Constants.GENERIC_CAPTURE_ORDER - movement.getCapturedPiece().getHeuristicValue() + this.getHeuristicValue()
+					Constants.GENERIC_CAPTURE_ORDER 
+					- movement.getCapturedPiece().getHeuristicValue( fullMoveCounter ) 
+					+ this.getHeuristicValue( fullMoveCounter )
 				);
 			}
 			else {
@@ -223,9 +225,9 @@ public class Pawn extends Piece {
 			
 			if (
 				principalVariationMovement != null
-				&& movement.isAMovementDefinedByStartAndEndSquares(
-					( Square )( principalVariationMovement.getSquareStart() ),
-					( Square )( principalVariationMovement.getSquareEnd() ),
+				&& movement.isAMovementDefinedByStartAndEndSquaresIds(
+					principalVariationMovement.getSquareStartId(),
+					principalVariationMovement.getSquareEndId(),
 					principalVariationMovement.getPromotionChoicePiece()
 				)
 			) {
@@ -291,21 +293,22 @@ public class Pawn extends Piece {
 				
 				if ( isCapture ) {
 					movement.setOrder(
-						Constants.CAPTURE_AND_PAWN_PROMOTION_ORDER - movement.getCapturedPiece().getHeuristicValue()
-						- movement.getPromotionChoicePiece().getHeuristicValue()
+						Constants.CAPTURE_AND_PAWN_PROMOTION_ORDER - movement.getCapturedPiece().getHeuristicValue( fullMoveCounter )
+						- movement.getPromotionChoicePiece().getHeuristicValue( fullMoveCounter )
 					);
 				}
 				else {
 					movement.setOrder(
-						Constants.NON_CAPTURE_AND_PAWN_PROMOTION_ORDER - movement.getPromotionChoicePiece().getHeuristicValue()
+						Constants.NON_CAPTURE_AND_PAWN_PROMOTION_ORDER 
+						- movement.getPromotionChoicePiece().getHeuristicValue( fullMoveCounter )
 					);
 				}
 				
 				if (
 					principalVariationMovement != null
-					&& movement.isAMovementDefinedByStartAndEndSquares(
-						( Square )( principalVariationMovement.getSquareStart() ),
-						( Square )( principalVariationMovement.getSquareEnd() ),
+					&& movement.isAMovementDefinedByStartAndEndSquaresIds(
+						principalVariationMovement.getSquareStartId(),
+						principalVariationMovement.getSquareEndId(),
 						principalVariationMovement.getPromotionChoicePiece()
 					)
 				) {

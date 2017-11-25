@@ -22,10 +22,10 @@ public class Board extends com.miguel.games.entities.Board {
 	//
 	// Central squares. It is considered important to occupy or attack them in the opening
 	//
-	private static final Square squareD4 = new Square( 27 );
-	private static final Square squareE4 = new Square( 28 );
-	private static final Square squareD5 = new Square( 35 );
-	private static final Square squareE5 = new Square( 36 );
+	private static final int d4SquareId = 27;
+	private static final int e4SquareId = 28;
+	private static final int d5SquareId = 35;
+	private static final int e5SquareId = 36;
 	
 	public void initialize() {
 		
@@ -139,15 +139,12 @@ public class Board extends com.miguel.games.entities.Board {
 			
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
-			Square square =
-				new Square( i );
-			
-			if ( ! this.isFreeSquare( square ) ) {
+			if ( ! this.isFreeSquareId( i ) ) {
 				
 				Piece piece =
-					this.getPieceByColourAndSquare(
+					this.getPieceByColourAndSquareId(
 						Constants.WHITE_COLOUR,
-						square
+						i
 					);
 				
 				if ( piece != null ) {
@@ -155,9 +152,9 @@ public class Board extends com.miguel.games.entities.Board {
 				}
 				else {
 					piece =
-						this.getPieceByColourAndSquare(
+						this.getPieceByColourAndSquareId(
 							Constants.BLACK_COLOUR,
-							square
+							i
 						);
 
 					whatToPrint = piece.toString() + " ";
@@ -173,15 +170,12 @@ public class Board extends com.miguel.games.entities.Board {
 			
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
-			Square square =
-				new Square( i );
-			
-			if ( ! this.isFreeSquare( square ) ) {
+			if ( ! this.isFreeSquareId( i ) ) {
 				
 				Piece piece =
-					this.getPieceByColourAndSquare(
+					this.getPieceByColourAndSquareId(
 						Constants.WHITE_COLOUR,
-						square
+						i
 					);
 				
 				if ( piece != null ) {
@@ -189,9 +183,9 @@ public class Board extends com.miguel.games.entities.Board {
 				}
 				else {
 					piece =
-						this.getPieceByColourAndSquare(
+						this.getPieceByColourAndSquareId(
 							Constants.BLACK_COLOUR,
-							square
+							i
 						);
 					
 					whatToPrint = piece.toString() + " ";
@@ -207,15 +201,12 @@ public class Board extends com.miguel.games.entities.Board {
 			
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
-			Square square =
-				new Square( i );
-			
-			if ( ! this.isFreeSquare( square ) ) {
+			if ( ! this.isFreeSquareId( i ) ) {
 				
 				Piece piece =
-					this.getPieceByColourAndSquare(
+					this.getPieceByColourAndSquareId(
 						Constants.WHITE_COLOUR,
-						square
+						i
 					);
 				
 				if ( piece != null ) {
@@ -223,9 +214,9 @@ public class Board extends com.miguel.games.entities.Board {
 				}
 				else {
 					piece =
-						this.getPieceByColourAndSquare(
+						this.getPieceByColourAndSquareId(
 							Constants.BLACK_COLOUR,
-							square
+							i
 						);
 					
 					whatToPrint = piece.toString() + " ";
@@ -241,15 +232,12 @@ public class Board extends com.miguel.games.entities.Board {
 			
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
-			Square square =
-				new Square( i );
-			
-			if ( ! this.isFreeSquare( square ) ) {
+			if ( ! this.isFreeSquareId( i ) ) {
 				
 				Piece piece =
-					this.getPieceByColourAndSquare(
+					this.getPieceByColourAndSquareId(
 						Constants.WHITE_COLOUR,
-						square
+						i
 					);
 				
 				if ( piece != null ) {
@@ -257,9 +245,9 @@ public class Board extends com.miguel.games.entities.Board {
 				}
 				else {
 					piece =
-						this.getPieceByColourAndSquare(
+						this.getPieceByColourAndSquareId(
 							Constants.BLACK_COLOUR,
-							square
+							i
 						);
 					
 					whatToPrint = piece.toString() + " ";
@@ -275,15 +263,12 @@ public class Board extends com.miguel.games.entities.Board {
 			
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
-			Square square =
-				new Square( i );
-			
-			if ( ! this.isFreeSquare( square ) ) {
+			if ( ! this.isFreeSquareId( i ) ) {
 				
 				Piece piece =
-					this.getPieceByColourAndSquare(
+					this.getPieceByColourAndSquareId(
 						Constants.WHITE_COLOUR,
-						square
+						i
 					);
 				
 				if ( piece != null ) {
@@ -291,9 +276,9 @@ public class Board extends com.miguel.games.entities.Board {
 				}
 				else {
 					piece =
-						this.getPieceByColourAndSquare(
+						this.getPieceByColourAndSquareId(
 							Constants.BLACK_COLOUR,
-							square
+							i
 						);
 					
 					whatToPrint = piece.toString() + " ";
@@ -309,15 +294,12 @@ public class Board extends com.miguel.games.entities.Board {
 			
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
-			Square square =
-				new Square( i );
-			
-			if ( ! this.isFreeSquare( square ) ) {
+			if ( ! this.isFreeSquareId( i ) ) {
 				
 				Piece piece =
-					this.getPieceByColourAndSquare(
+					this.getPieceByColourAndSquareId(
 						Constants.WHITE_COLOUR,
-						square
+						i
 					);
 				
 				if ( piece != null ) {
@@ -325,9 +307,9 @@ public class Board extends com.miguel.games.entities.Board {
 				}
 				else {
 					piece =
-						this.getPieceByColourAndSquare(
+						this.getPieceByColourAndSquareId(
 							Constants.BLACK_COLOUR,
-							square
+							i
 						);
 					
 					whatToPrint = piece.toString() + " ";
@@ -343,15 +325,12 @@ public class Board extends com.miguel.games.entities.Board {
 			
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
-			Square square =
-				new Square( i );
-			
-			if ( ! this.isFreeSquare( square ) ) {
+			if ( ! this.isFreeSquareId( i ) ) {
 				
 				Piece piece =
-					this.getPieceByColourAndSquare(
+					this.getPieceByColourAndSquareId(
 						Constants.WHITE_COLOUR,
-						square
+						i
 					);
 				
 				if ( piece != null ) {
@@ -359,9 +338,9 @@ public class Board extends com.miguel.games.entities.Board {
 				}
 				else {
 					piece =
-						this.getPieceByColourAndSquare(
+						this.getPieceByColourAndSquareId(
 							Constants.BLACK_COLOUR,
-							square
+							i
 						);
 					
 					whatToPrint = piece.toString() + " ";
@@ -377,15 +356,12 @@ public class Board extends com.miguel.games.entities.Board {
 			
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
-			Square square =
-				new Square( i );
-			
-			if ( ! this.isFreeSquare( square ) ) {
+			if ( ! this.isFreeSquareId( i ) ) {
 				
 				Piece piece =
-					this.getPieceByColourAndSquare(
+					this.getPieceByColourAndSquareId(
 						Constants.WHITE_COLOUR,
-						square
+						i
 					);
 				
 				if ( piece != null ) {
@@ -393,9 +369,9 @@ public class Board extends com.miguel.games.entities.Board {
 				}
 				else {
 					piece =
-						this.getPieceByColourAndSquare(
+						this.getPieceByColourAndSquareId(
 							Constants.BLACK_COLOUR,
-							square
+							i
 						);
 					
 					whatToPrint = piece.toString() + " ";
@@ -428,48 +404,30 @@ public class Board extends com.miguel.games.entities.Board {
 		return result;
 	}
 
-	public boolean isPieceAttackingSquare(
-		Piece piece, 
-		Square square
-	) {
-		return 
-			piece.isAttackingSquare(
-				square,
-				this
-			);
-	}
-	
 	public boolean isPieceAttackingAnyOfTheFourCentralSquares(
 		Piece piece
 	) {
 		return (
-			this.isPieceAttackingSquare( piece, squareD4 )
-			|| this.isPieceAttackingSquare( piece, squareD5 )
-			|| this.isPieceAttackingSquare( piece, squareE4 )
-			|| this.isPieceAttackingSquare( piece, squareE5 )
+			piece.isAttackingSquareId( d4SquareId, this )
+			|| piece.isAttackingSquareId( d5SquareId, this )
+			|| piece.isAttackingSquareId( e4SquareId, this )
+			|| piece.isAttackingSquareId( e5SquareId, this )
 		);
 	}
 	
-	public boolean areAdjacentSquares(Square squareStart, Square squareEnd) {
-		
-		int squareStartId = squareStart.getId();
-		int squareEndId = squareEnd.getId();
-		
+	public boolean areAdjacentSquaresIds(int squareStartId, int squareEndId) {
 		return 
 			Math.abs( squareEndId / 8 - squareStartId / 8 ) < 2
 			&& Math.abs( squareEndId % 8 - squareStartId % 8 ) < 2;
 	
 	}
 
-	public boolean areDiagonalAdjacentSquaresWithDirection(
-		Square squareStart,
-		Square squareEnd,
+	public boolean areDiagonalAdjacentSquaresIdsWithDirection(
+		int squareStartId,
+		int squareEndId,
 		int colour
 	) {
 		boolean result = false;
-		
-		int squareStartId = squareStart.getId();
-		int squareEndId = squareEnd.getId();
 		
 		if ( colour == Constants.WHITE_COLOUR ) {
 			
@@ -486,15 +444,12 @@ public class Board extends com.miguel.games.entities.Board {
 		return result;
 	}
 
-	public boolean emptyRowOrColumnBetweenSquares(
-		Square squareStart, 
-		Square squareEnd
+	public boolean emptyRowOrColumnBetweenSquaresIds(
+		int squareStartId, 
+		int squareEndId
 	) {
 
 		boolean result = false;
-		
-		int squareStartId = squareStart.getId();
-		int squareEndId = squareEnd.getId();
 		
 		//
 		// First, we need to know if the squares are in the same row
@@ -510,7 +465,7 @@ public class Board extends com.miguel.games.entities.Board {
 			int maxSquareId = Math.max( squareStartId, squareEndId );
 			
 			for ( int i = Math.min( squareStartId, squareEndId ) + 8; result && i != maxSquareId; i = i + 8 ) {
-				result = this.isFreeSquare( new Square( i ) );
+				result = this.isFreeSquareId( i );
 			}
 		}
 		else if ( squareStartId / 8 == squareEndId / 8 ) {
@@ -522,22 +477,19 @@ public class Board extends com.miguel.games.entities.Board {
 			int maxSquareId = Math.max( squareStartId, squareEndId );
 			
 			for ( int i = Math.min( squareStartId, squareEndId ) + 1; result && i != maxSquareId; i = i + 1 ) {
-				result = this.isFreeSquare( new Square( i ) );
+				result = this.isFreeSquareId( i );
 			}
 		}
 		
 		return result;
 	}
 
-	public boolean emptyDiagonalBetweenSquares(
-		Square squareStart,
-		Square squareEnd
+	public boolean emptyDiagonalBetweenSquaresIds(
+		int squareStartId,
+		int squareEndId
 	) {
 		
 		boolean result = false;
-		
-		int squareStartId = squareStart.getId();
-		int squareEndId = squareEnd.getId();
 		
 		//
 		// First, we check that both squares are in a diagonal
@@ -572,9 +524,7 @@ public class Board extends com.miguel.games.entities.Board {
 			}
 			
 			for ( int i = squareStartId + addValue; result && i != squareEndId; i = i + addValue ) {
-				
-				result = 
-					this.isFreeSquare( new Square( i ) );
+				result = this.isFreeSquareId( i );
 			}
 		}
 		
@@ -582,14 +532,10 @@ public class Board extends com.miguel.games.entities.Board {
 		
 	}
 
-	public boolean existsLMovementBetweenSquares(
-		Square squareStart,
-		Square squareEnd
+	public boolean existsLMovementBetweenSquaresIds(
+		int squareStartId,
+		int squareEndId
 	) {
-		
-		int squareStartId = squareStart.getId();
-		int squareEndId = squareEnd.getId();
-		
 		int columnDifference =
 			Math.abs( squareStartId % 8 - squareEndId % 8 );
 		
@@ -609,16 +555,12 @@ public class Board extends com.miguel.games.entities.Board {
 			
 	}
 
-	public boolean isFreeSquare( Square square ) {
-		
-		return 
-			this.freeSquares.containsKey(
-				square.getId()
-			);
+	public boolean isFreeSquareId( int squareId ) {
+		return this.freeSquares.containsKey( squareId );
 	}
 	
-	public boolean isSquareOccupiedByPieceByColour(
-		Square square,
+	public boolean isSquareIdOccupiedByPieceByColour(
+		int squareId,
 		int colour
 	) {
 		boolean result = false;
@@ -633,22 +575,19 @@ public class Board extends com.miguel.games.entities.Board {
 		
 		for ( int i = 0; ! result && i < sizePieces; i++ ) {
 			result =
-				pieces.get( i ).getSquare().getId() == square.getId();
+				pieces.get( i ).getSquareId() == squareId;
 		}
 		
 		return result;
 	}
 	
-	public ArrayList<Square> getKingMovementEndSquares(
-		Square squareStart,
+	public ArrayList<Integer> getKingMovementEndSquaresIds(
+		int squareStartId,
 		int colour
 	) {
 		
-		ArrayList<Square> result =
-			new ArrayList<Square>();
-		
-		int squareStartId =
-			squareStart.getId();
+		ArrayList<Integer> result =
+			new ArrayList<Integer>();
 		
 		int rowStart = squareStartId / 8;
 		int columnStart = squareStartId % 8;
@@ -656,7 +595,7 @@ public class Board extends com.miguel.games.entities.Board {
 		int upSquareId = squareStartId + 8;
 		int upRightSquareId = squareStartId + 9;
 		int rightSquareId = squareStartId + 1;
-		int downRight = squareStartId - 7;
+		int downRightId = squareStartId - 7;
 		int downSquareId = squareStartId - 8;
 		int downLeftSquareId = squareStartId - 9;
 		int leftSquareId = squareStartId - 1;
@@ -664,93 +603,90 @@ public class Board extends com.miguel.games.entities.Board {
 		
 		if ( 
 			rowStart < 7 
-			&& ! this.isSquareOccupiedByPieceByColour( 
-				new Square( upSquareId ), 
+			&& ! this.isSquareIdOccupiedByPieceByColour( 
+				upSquareId, 
 				colour 
 			) 
 		) {
-			result.add( new Square( upSquareId ) );
+			result.add( upSquareId );
 		}
 		if ( 
 			rowStart < 7
 			&& columnStart < 7
-			&& ! this.isSquareOccupiedByPieceByColour( 
-				new Square( upRightSquareId ), 
+			&& ! this.isSquareIdOccupiedByPieceByColour( 
+				upRightSquareId, 
 				colour 
 			) 
 		) {
-			result.add( new Square( upRightSquareId ) );
+			result.add( upRightSquareId );
 		}
 		if ( 
 			columnStart < 7
-			&& ! this.isSquareOccupiedByPieceByColour( 
-				new Square( rightSquareId ), 
+			&& ! this.isSquareIdOccupiedByPieceByColour( 
+				rightSquareId, 
 				colour 
 			) 
 		) {
-			result.add( new Square( rightSquareId ) );
+			result.add( rightSquareId );
 		}
 		if ( 
 			rowStart > 0
 			&& columnStart < 7
-			&& ! this.isSquareOccupiedByPieceByColour( 
-				new Square( downRight ), 
+			&& ! this.isSquareIdOccupiedByPieceByColour( 
+				downRightId, 
 				colour 
 			) 
 		) {
-			result.add( new Square( downRight ) );
+			result.add( downRightId );
 		}
 		if ( 
 			rowStart > 0 
-			&& ! this.isSquareOccupiedByPieceByColour( 
-				new Square( downSquareId ), 
+			&& ! this.isSquareIdOccupiedByPieceByColour( 
+				downSquareId, 
 				colour 
 			) 
 		) {
-			result.add( new Square( downSquareId ) );
+			result.add( downSquareId );
 		}
 		if ( 
 			rowStart > 0
 			&& columnStart > 0
-			&& ! this.isSquareOccupiedByPieceByColour( 
-				new Square( downLeftSquareId ), 
+			&& ! this.isSquareIdOccupiedByPieceByColour( 
+				downLeftSquareId, 
 				colour 
 			) 
 		) {
-			result.add( new Square( downLeftSquareId ) );
+			result.add( downLeftSquareId );
 		}
 		if ( 
 			columnStart > 0
-			&& ! this.isSquareOccupiedByPieceByColour( 
-				new Square( leftSquareId ), 
+			&& ! this.isSquareIdOccupiedByPieceByColour( 
+				leftSquareId, 
 				colour 
 			) 
 		) {
-			result.add( new Square( leftSquareId ) );
+			result.add( leftSquareId );
 		}
 		if ( 
 			rowStart < 7
 			&& columnStart > 0
-			&& ! this.isSquareOccupiedByPieceByColour( 
-				new Square( upLeftSquareId ), 
+			&& ! this.isSquareIdOccupiedByPieceByColour( 
+				upLeftSquareId, 
 				colour 
 			) 
 		) {
-			result.add( new Square( upLeftSquareId ) );
+			result.add( upLeftSquareId );
 		}
 		
 		return result;
 	}
 
-	public ArrayList<Square> getPawnMovementEndSquares(
-		Square squareStart, 
+	public ArrayList<Integer> getPawnMovementEndSquaresIds(
+		int squareStartId, 
 		int colour
 	) {
-		ArrayList<Square> result =
-			new ArrayList<Square>();
-		
-		int squareStartId =
-			squareStart.getId();
+		ArrayList<Integer> result =
+			new ArrayList<Integer>();
 		
 		int rowStart = squareStartId / 8;
 		int columnStart = squareStartId % 8;
@@ -795,7 +731,10 @@ public class Board extends com.miguel.games.entities.Board {
 			
 		if ( 
 			columnStart > 0 
-			&& this.getPieceByColourAndSquare( rivalColour, new Square( squareStartId + valueToAddLeftSide ) ) != null 
+			&& this.getPieceByColourAndSquareId(
+				rivalColour,
+				squareStartId + valueToAddLeftSide
+			) != null 
 		) {
 			//
 			// Diagonal-left
@@ -806,17 +745,20 @@ public class Board extends com.miguel.games.entities.Board {
 				// 4 promotion choices (queen, rook, bishop, knight) 
 				//
 				for ( int i = 0; i < 4; i++ ) {
-					result.add( new Square( squareStartId + valueToAddLeftSide ) );					
+					result.add( squareStartId + valueToAddLeftSide );					
 				}
 			}
 			else {
-				result.add( new Square( squareStartId + valueToAddLeftSide ) );
+				result.add( squareStartId + valueToAddLeftSide );
 			}
 		}
 		
 		if ( 
 			columnStart < 7 
-			&& this.getPieceByColourAndSquare( rivalColour, new Square( squareStartId + valueToAddRightSide ) ) != null
+			&& this.getPieceByColourAndSquareId(
+				rivalColour,
+				squareStartId + valueToAddRightSide
+			) != null
 		) {
 			//
 			// Diagonal-right
@@ -827,11 +769,11 @@ public class Board extends com.miguel.games.entities.Board {
 				// 4 promotion choices (queen, rook, bishop, knight) 
 				//
 				for ( int i = 0; i < 4; i++ ) {
-					result.add( new Square( squareStartId + valueToAddRightSide ) );					
+					result.add( squareStartId + valueToAddRightSide );					
 				}
 			}
 			else {
-				result.add( new Square( squareStartId + valueToAddRightSide ) );
+				result.add( squareStartId + valueToAddRightSide );
 			}
 		}
 		
@@ -845,7 +787,7 @@ public class Board extends com.miguel.games.entities.Board {
 		
 		boolean normalAdvancePossible = false;
 		
-		if ( this.isFreeSquare( new Square( squareStartId + valueToAddNormalAdvance ) ) ) {
+		if ( this.isFreeSquareId( squareStartId + valueToAddNormalAdvance ) ) {
 			//
 			// Normal advance
 			//
@@ -855,11 +797,11 @@ public class Board extends com.miguel.games.entities.Board {
 				// 4 promotion choices (queen, rook, bishop, knight) 
 				//
 				for ( int i = 0; i < 4; i++ ) {
-					result.add( new Square( squareStartId + valueToAddNormalAdvance ) );					
+					result.add( squareStartId + valueToAddNormalAdvance );					
 				}
 			}
 			else {
-				result.add( new Square( squareStartId + valueToAddNormalAdvance ) );
+				result.add( squareStartId + valueToAddNormalAdvance );
 			}
 			
 			normalAdvancePossible = true;
@@ -881,26 +823,23 @@ public class Board extends com.miguel.games.entities.Board {
 		if ( 
 			appropiateRowForInitialDoubleAdvance
 			&& normalAdvancePossible
-			&& this.isFreeSquare( new Square( squareStartId + valueToAddInitialDoubleAdvance ) )
+			&& this.isFreeSquareId( squareStartId + valueToAddInitialDoubleAdvance )
 		) {
 			//
-			// 2 squares initial advance. Here is, of course, impossible to promote this pawn
+			// 2 squares initial advance. Here it is, of course, impossible to promote this pawn
 			//
-			result.add( new Square( squareStartId + valueToAddInitialDoubleAdvance ) );
+			result.add( squareStartId + valueToAddInitialDoubleAdvance );
 		}
 		
 		return result;
 	}
 	
-	public ArrayList<Square> getRookMovementEndSquares(
-		Square squareStart, 
+	public ArrayList<Integer> getRookMovementEndSquaresIds(
+		int squareStartId, 
 		int colour
 	) {
-		ArrayList<Square> result =
-			new ArrayList<Square>();
-		
-		int squareStartId =
-			squareStart.getId();
+		ArrayList<Integer> result =
+			new ArrayList<Integer>();
 		
 		//
 		// We have to search for every free reachable square in the same row or
@@ -914,29 +853,26 @@ public class Board extends com.miguel.games.entities.Board {
 		//
 		for ( int i = squareStartId + 8; keepOnSearchingThisDirection && i / 8 < 8; i = i + 8 ) {
 			
-			Square square =
-				new Square( i );
-			
-			if ( this.isFreeSquare( new Square( i ) ) ) {
+			if ( this.isFreeSquareId( i ) ) {
 				//
 				// A free square. We add it
 				//
-				result.add( square );
+				result.add( i );
 			}
 			else {
 				
 				keepOnSearchingThisDirection = false;
 				
 				if ( 
-					! this.isSquareOccupiedByPieceByColour(
-						square, 
+					! this.isSquareIdOccupiedByPieceByColour(
+						i, 
 						colour
 					) 
 				) {
 					//
 					// A square available to capture. We add it
 					//
-					result.add( square );
+					result.add( i );
 				}
 			}
 		}
@@ -948,29 +884,26 @@ public class Board extends com.miguel.games.entities.Board {
 		//
 		for ( int i = squareStartId - 8; keepOnSearchingThisDirection && i >= 0; i = i - 8 ) {
 			
-			Square square =
-				new Square( i );
-			
-			if ( this.isFreeSquare( new Square( i ) ) ) {
+			if ( this.isFreeSquareId( i ) ) {
 				//
 				// A free square. We add it
 				//
-				result.add( square );
+				result.add( i );
 			}
 			else {
 				
 				keepOnSearchingThisDirection = false;
 				
 				if ( 
-					! this.isSquareOccupiedByPieceByColour(
-						square, 
+					! this.isSquareIdOccupiedByPieceByColour(
+						i, 
 						colour
 					) 
 				) {
 					//
 					// A square available to capture. We add it
 					//
-					result.add( square );
+					result.add( i );
 				}
 			}
 		}
@@ -982,29 +915,26 @@ public class Board extends com.miguel.games.entities.Board {
 		//
 		for ( int i = squareStartId - 1; keepOnSearchingThisDirection && i >= 0 && i % 8 < 7; i = i - 1 ) {
 			
-			Square square =
-				new Square( i );
-			
-			if ( this.isFreeSquare( new Square( i ) ) ) {
+			if ( this.isFreeSquareId( i ) ) {
 				//
 				// A free square. We add it
 				//
-				result.add( square );
+				result.add( i );
 			}
 			else {
 				
 				keepOnSearchingThisDirection = false;
 				
 				if ( 
-					! this.isSquareOccupiedByPieceByColour(
-						square, 
+					! this.isSquareIdOccupiedByPieceByColour(
+						i, 
 						colour
 					) 
 				) {
 					//
 					// A square available to capture. We add it
 					//
-					result.add( square );
+					result.add( i );
 				}
 			}
 		}
@@ -1016,29 +946,26 @@ public class Board extends com.miguel.games.entities.Board {
 		//
 		for ( int i = squareStartId + 1; keepOnSearchingThisDirection && i % 8 > 0; i = i + 1 ) {
 			
-			Square square =
-				new Square( i );
-			
-			if ( this.isFreeSquare( new Square( i ) ) ) {
+			if ( this.isFreeSquareId( i ) ) {
 				//
 				// A free square. We add it
 				//
-				result.add( square );
+				result.add( i );
 			}
 			else {
 				
 				keepOnSearchingThisDirection = false;
 				
 				if ( 
-					! this.isSquareOccupiedByPieceByColour(
-						square, 
+					! this.isSquareIdOccupiedByPieceByColour(
+						i, 
 						colour
 					) 
 				) {
 					//
 					// A square available to capture. We add it
 					//
-					result.add( square );
+					result.add( i );
 				}
 			}
 		}
@@ -1046,15 +973,12 @@ public class Board extends com.miguel.games.entities.Board {
 		return result;
 	}
 	
-	public ArrayList<Square> getBishopMovementEndSquares(
-		Square squareStart, 
+	public ArrayList<Integer> getBishopMovementEndSquaresIds(
+		int squareStartId, 
 		int colour
 	) {
-		ArrayList<Square> result =
-			new ArrayList<Square>();
-		
-		int squareStartId =
-			squareStart.getId();
+		ArrayList<Integer> result =
+			new ArrayList<Integer>();
 		
 		//
 		// We have to search for every free reachable square in the same diagonals
@@ -1068,29 +992,26 @@ public class Board extends com.miguel.games.entities.Board {
 		//
 		for ( int i = squareStartId + 9; keepOnSearchingThisDirection && i / 8 < 8 && i % 8 > 0; i = i + 9 ) {
 			
-			Square square =
-				new Square( i );
-			
-			if ( this.isFreeSquare( new Square( i ) ) ) {
+			if ( this.isFreeSquareId( i ) ) {
 				//
 				// A free square. We add it
 				//
-				result.add( square );
+				result.add( i );
 			}
 			else {
 				
 				keepOnSearchingThisDirection = false;
 				
 				if ( 
-					! this.isSquareOccupiedByPieceByColour(
-						square, 
+					! this.isSquareIdOccupiedByPieceByColour(
+						i, 
 						colour
 					) 
 				) {
 					//
 					// A square available to capture. We add it
 					//
-					result.add( square );
+					result.add( i );
 				}
 			}
 		}
@@ -1102,29 +1023,26 @@ public class Board extends com.miguel.games.entities.Board {
 		//
 		for ( int i = squareStartId - 7; keepOnSearchingThisDirection && i > 0 && i % 8 > 0; i = i - 7 ) {
 			
-			Square square =
-				new Square( i );
-			
-			if ( this.isFreeSquare( new Square( i ) ) ) {
+			if ( this.isFreeSquareId( i ) ) {
 				//
 				// A free square. We add it
 				//
-				result.add( square );
+				result.add( i );
 			}
 			else {
 				
 				keepOnSearchingThisDirection = false;
 				
 				if ( 
-					! this.isSquareOccupiedByPieceByColour(
-						square, 
+					! this.isSquareIdOccupiedByPieceByColour(
+						i, 
 						colour
 					) 
 				) {
 					//
 					// A square available to capture. We add it
 					//
-					result.add( square );
+					result.add( i );
 				}
 			}
 		}
@@ -1136,29 +1054,26 @@ public class Board extends com.miguel.games.entities.Board {
 		//
 		for ( int i = squareStartId - 9; keepOnSearchingThisDirection && i >= 0 && i % 8 < 7; i = i - 9 ) {
 			
-			Square square =
-				new Square( i );
-			
-			if ( this.isFreeSquare( new Square( i ) ) ) {
+			if ( this.isFreeSquareId( i ) ) {
 				//
 				// A free square. We add it
 				//
-				result.add( square );
+				result.add( i );
 			}
 			else {
 				
 				keepOnSearchingThisDirection = false;
 				
 				if ( 
-					! this.isSquareOccupiedByPieceByColour(
-						square, 
+					! this.isSquareIdOccupiedByPieceByColour(
+						i, 
 						colour
 					) 
 				) {
 					//
 					// A square available to capture. We add it
 					//
-					result.add( square );
+					result.add( i );
 				}
 			}
 		}
@@ -1170,29 +1085,26 @@ public class Board extends com.miguel.games.entities.Board {
 		//
 		for ( int i = squareStartId + 7; keepOnSearchingThisDirection && i / 8 < 8 && i % 8 < 7; i = i + 7 ) {
 			
-			Square square =
-				new Square( i );
-			
-			if ( this.isFreeSquare( new Square( i ) ) ) {
+			if ( this.isFreeSquareId( i ) ) {
 				//
 				// A free square. We add it
 				//
-				result.add( square );
+				result.add( i );
 			}
 			else {
 				
 				keepOnSearchingThisDirection = false;
 				
 				if ( 
-					! this.isSquareOccupiedByPieceByColour(
-						square, 
+					! this.isSquareIdOccupiedByPieceByColour(
+						i, 
 						colour
 					) 
 				) {
 					//
 					// A square available to capture. We add it
 					//
-					result.add( square );
+					result.add( i );
 				}
 			}
 		}
@@ -1200,15 +1112,12 @@ public class Board extends com.miguel.games.entities.Board {
 		return result;
 	}
 	
-	public ArrayList<Square> getKnightMovementEndSquares(
-		Square squareStart, 
+	public ArrayList<Integer> getKnightMovementEndSquaresIds(
+		int squareStartId, 
 		int colour
 	) {
-		ArrayList<Square> result =
-			new ArrayList<Square>();
-		
-		int squareStartId =
-			squareStart.getId();
+		ArrayList<Integer> result =
+			new ArrayList<Integer>();
 		
 		//
 		// We have to search for every reachable square doing a typical knight L-movement.
@@ -1224,12 +1133,12 @@ public class Board extends com.miguel.games.entities.Board {
 		if (
 			squareEnd1 / 8 < 8
 			&& squareEnd1 % 8 > 0
-			&& ! this.isSquareOccupiedByPieceByColour(
-				new Square( squareEnd1 ),
+			&& ! this.isSquareIdOccupiedByPieceByColour(
+				squareEnd1,
 				colour
 			)
 		) {
-			result.add( new Square( squareEnd1 ) );
+			result.add( squareEnd1 );
 		}
 		
 		int squareEnd2 =
@@ -1238,12 +1147,12 @@ public class Board extends com.miguel.games.entities.Board {
 		if (
 			squareEnd2 / 8 < 8
 			&& squareEnd2 % 8 > 1
-			&& ! this.isSquareOccupiedByPieceByColour(
-				new Square( squareEnd2 ),
+			&& ! this.isSquareIdOccupiedByPieceByColour(
+				squareEnd2,
 				colour
 			)
 		) {
-			result.add( new Square( squareEnd2 ) );
+			result.add( squareEnd2 );
 		}
 		
 		int squareEnd3 =
@@ -1252,12 +1161,12 @@ public class Board extends com.miguel.games.entities.Board {
 		if (
 			squareEnd3 > 0
 			&& squareEnd3 % 8 > 1
-			&& ! this.isSquareOccupiedByPieceByColour(
-				new Square( squareEnd3 ),
+			&& ! this.isSquareIdOccupiedByPieceByColour(
+				squareEnd3,
 				colour
 			)
 		) {
-			result.add( new Square( squareEnd3 ) );
+			result.add( squareEnd3 );
 		}
 		
 		int squareEnd4 =
@@ -1266,12 +1175,12 @@ public class Board extends com.miguel.games.entities.Board {
 		if (
 			squareEnd4 > 0
 			&& squareEnd4 % 8 > 0
-			&& ! this.isSquareOccupiedByPieceByColour(
-				new Square( squareEnd4 ),
+			&& ! this.isSquareIdOccupiedByPieceByColour(
+				squareEnd4,
 				colour
 			)
 		) {
-			result.add( new Square( squareEnd4 ) );
+			result.add( squareEnd4 );
 		}
 		
 		int squareEnd5 =
@@ -1280,12 +1189,12 @@ public class Board extends com.miguel.games.entities.Board {
 		if (
 			squareEnd5 >= 0
 			&& squareEnd5 % 8 < 7
-			&& ! this.isSquareOccupiedByPieceByColour(
-				new Square( squareEnd5 ),
+			&& ! this.isSquareIdOccupiedByPieceByColour(
+				squareEnd5,
 				colour
 			)
 		) {
-			result.add( new Square( squareEnd5 ) );
+			result.add( squareEnd5 );
 		}
 		
 		int squareEnd6 =
@@ -1294,12 +1203,12 @@ public class Board extends com.miguel.games.entities.Board {
 		if (
 			squareEnd6 >= 0
 			&& squareEnd6 % 8 < 6
-			&& ! this.isSquareOccupiedByPieceByColour(
-				new Square( squareEnd6 ),
+			&& ! this.isSquareIdOccupiedByPieceByColour(
+				squareEnd6,
 				colour
 			)
 		) {
-			result.add( new Square( squareEnd6 ) );
+			result.add( squareEnd6 );
 		}
 		
 		int squareEnd7 =
@@ -1308,12 +1217,12 @@ public class Board extends com.miguel.games.entities.Board {
 		if (
 			squareEnd7 / 8 < 8
 			&& squareEnd7 % 8 < 6
-			&& ! this.isSquareOccupiedByPieceByColour(
-				new Square( squareEnd7 ),
+			&& ! this.isSquareIdOccupiedByPieceByColour(
+				squareEnd7,
 				colour
 			)
 		) {
-			result.add( new Square( squareEnd7 ) );
+			result.add( squareEnd7 );
 		}
 		
 		int squareEnd8 =
@@ -1322,12 +1231,12 @@ public class Board extends com.miguel.games.entities.Board {
 		if (
 			squareEnd8 / 8 < 8
 			&& squareEnd8 % 8 < 7
-			&& ! this.isSquareOccupiedByPieceByColour(
-				new Square( squareEnd8 ),
+			&& ! this.isSquareIdOccupiedByPieceByColour(
+				squareEnd8,
 				colour
 			)
 		) {
-			result.add( new Square( squareEnd8 ) );
+			result.add( squareEnd8 );
 		}
 		
 		return result;
@@ -1342,7 +1251,7 @@ public class Board extends com.miguel.games.entities.Board {
 	 * @return
 	 */
 	public boolean isPieceOnTheIesimRow( Piece piece, int row ) {
-		return ( ( piece.getSquare().getId() / 8 ) == row );
+		return ( ( piece.getSquareId() / 8 ) == row );
 	}
 	
 	/**
@@ -1354,7 +1263,7 @@ public class Board extends com.miguel.games.entities.Board {
 	 * @return
 	 */
 	public boolean isPieceOnTheIesimColumn( Piece piece, int column ) {
-		return ( ( piece.getSquare().getId() % 8 ) == column );
+		return ( ( piece.getSquareId() % 8 ) == column );
 	}
 	
 	public boolean thereIsASameColourPawnInTheSameColumn( Piece piece ) {
@@ -1367,13 +1276,13 @@ public class Board extends com.miguel.games.entities.Board {
 			: this.blackPieces;
 		
 		int sizePieces = pieces.size();
-		int pieceColumn = piece.getSquare().getId() % 8;
+		int pieceColumn = piece.getSquareId() % 8;
 		
 		for ( int i = 0; ( ! result ) && i < sizePieces; i++ ) {
 			Piece iesimPiece = pieces.get( i );
 			result =
 				iesimPiece instanceof Pawn  // It is a pawn
-				&& iesimPiece.getSquare().getId() != piece.getSquare().getId()  // It is not the piece we received as argument
+				&& iesimPiece.getSquareId() != piece.getSquareId()  // It is not the piece we received as argument
 				&& isPieceOnTheIesimColumn( iesimPiece, pieceColumn );
 		}
 		
@@ -1390,7 +1299,7 @@ public class Board extends com.miguel.games.entities.Board {
 			: this.blackPieces;
 		
 		int sizePieces = pieces.size();
-		int pawnColumn = pawn.getSquare().getId() % 8;
+		int pawnColumn = pawn.getSquareId() % 8;
 		
 		for ( int i = 0; result && i < sizePieces; i++ ) {
 			Piece iesimPiece = pieces.get( i );
@@ -1416,9 +1325,81 @@ public class Board extends com.miguel.games.entities.Board {
 		return result;
 	}
 	
-	public Piece getPieceByColourAndSquare(
+	/**
+	 * Detecting a real fully passed pawn requires too much processing energy (time). We are here trying
+	 * to detect feasible candidates to be passed pawns. It is recommended to take this into account
+	 * when choosing how many bonus points we give to such pawns in the evaluation function
+	 * If one carefully evaluates this code below, it is clear that it is kind of arbitrary. You can
+	 * judge by yourself when you try with two pawns on the board if this method suits the chess style
+	 * you are looking for
+	 * 
+	 * @param pawn
+	 * @return
+	 */
+	public boolean isCandidateToBePassedPawn( Pawn pawn ) {
+		boolean result = true;  // By default, until we find a rival pawn which could be able to stop our pawn
+		
+		int colour = pawn.getColour();
+		int pawnColumn = pawn.getSquareId() % 8;
+		int pawnRow = pawn.getSquareId() / 8;
+		
+		if ( colour == Constants.WHITE_COLOUR ) {
+			// It is a white pawn, so we will have a look at black pawns
+			ArrayList<Piece> pieces = this.blackPieces;
+			int sizePieces = pieces.size();
+			
+			for ( int i = 0; result && i < sizePieces; i++ ) {
+				Piece iesimPiece = pieces.get( i );
+				if ( iesimPiece instanceof Pawn ) {
+					int iesimPieceRow = iesimPiece.getSquareId() / 8;
+					if ( iesimPieceRow > pawnRow ) {
+						int iesimPieceColumn = iesimPiece.getSquareId() % 8;
+						if ( iesimPieceColumn == pawnColumn ) {
+							result = false;
+						}
+						else {
+							result =
+								(
+									Math.abs( iesimPieceRow - pawnRow )
+									- Math.abs( iesimPieceColumn - pawnColumn )
+								) < 1;
+						}
+					}
+				}
+			}
+		}
+		else {
+			// It is a black pawn, so we will have a look at white pawns
+			ArrayList<Piece> pieces = this.whitePieces;
+			int sizePieces = pieces.size();
+			
+			for ( int i = 0; result && i < sizePieces; i++ ) {
+				Piece iesimPiece = pieces.get( i );
+				if ( iesimPiece instanceof Pawn ) {
+					int iesimPieceRow = iesimPiece.getSquareId() / 8;
+					if ( iesimPieceRow < pawnRow ) {
+						int iesimPieceColumn = iesimPiece.getSquareId() % 8;
+						if ( iesimPieceColumn == pawnColumn ) {
+							result = false;
+						}
+						else {
+							result =
+								( 
+									Math.abs( iesimPieceRow - pawnRow )
+									- Math.abs( iesimPieceColumn - pawnColumn )
+								) < 1;
+						}
+					}
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	public Piece getPieceByColourAndSquareId(
 		int colour,
-		Square square
+		int squareId
 	) {
 		
 		Piece result = null;
@@ -1434,7 +1415,7 @@ public class Board extends com.miguel.games.entities.Board {
 		
 		for ( int i = 0; ( ! found ) && i < sizePieces; i++ ) {
 			result = pieces.get( i );
-			found = ( result.getSquare().getId() == square.getId() );
+			found = ( result.getSquareId() == squareId );
 		}
 		
 		if ( ! found ) {
@@ -1458,10 +1439,7 @@ public class Board extends com.miguel.games.entities.Board {
 		
 	}
 
-	public void addPiece(
-		Piece piece
-	) {
-		
+	public void addPiece( Piece piece ) {
 		if ( piece.getColour() == Constants.WHITE_COLOUR ) {
 			this.whitePieces.add( piece );
 		}
@@ -1470,22 +1448,12 @@ public class Board extends com.miguel.games.entities.Board {
 		}
 	}
 	
-	public void addPiece(
-		Piece piece,
-		int index
-	) {
-		
+	public void addPiece( Piece piece, int index ) {
 		if ( piece.getColour() == Constants.WHITE_COLOUR ) {
-			this.whitePieces.add(
-				index,
-				piece
-			);
+			this.whitePieces.add( index, piece );
 		}
 		else {
-			this.blackPieces.add(
-				index,
-				piece
-			);
+			this.blackPieces.add( index, piece );
 		}
 	}
 	
@@ -1502,7 +1470,7 @@ public class Board extends com.miguel.games.entities.Board {
 			
 		for ( int i = 0; i < colourPieces.size(); i++ ) {
 			if ( colourPieces.get( i ) instanceof Rook ) {
-				result.add( ( Rook ) ( colourPieces.get( i ) ) );
+				result.add( ( Rook )( colourPieces.get( i ) ) );
 			}
 		}
 			

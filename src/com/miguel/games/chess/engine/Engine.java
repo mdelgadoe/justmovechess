@@ -998,6 +998,8 @@ public class Engine extends com.miguel.games.entities.Engine {
 		//
 		int result;
 		
+		int fullMoveCounter = position.getFullMoveCounter();
+		
 		ArrayList<Movement> movements =
 			position.getLegalMovements( false, null );
 		
@@ -1027,7 +1029,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 					whitePieces.get( i );
 				
 				whiteHeuristicValue =
-					whiteHeuristicValue + piece.getHeuristicValue();
+					whiteHeuristicValue + piece.getHeuristicValue( fullMoveCounter );
 			}
 			
 			//
@@ -1046,7 +1048,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 					blackPieces.get( i );
 				
 				blackHeuristicValue =
-					blackHeuristicValue + piece.getHeuristicValue();
+					blackHeuristicValue + piece.getHeuristicValue( fullMoveCounter );
 			}
 			
 			position.setWhiteHeuristicValue( whiteHeuristicValue );
@@ -1152,10 +1154,10 @@ public class Engine extends com.miguel.games.entities.Engine {
 				Piece piece = 
 					whitePieces.get( i );
 				
-				int squareId = piece.getSquare().getId();
+				int squareId = piece.getSquareId();
 				
 				whiteHeuristicValue =
-					whiteHeuristicValue + piece.getHeuristicValue();
+					whiteHeuristicValue + piece.getHeuristicValue( fullMoveCounter );
 				
 				//
 				// A pawn or knight placed in the central squares 
@@ -1261,10 +1263,12 @@ public class Engine extends com.miguel.games.entities.Engine {
 						//
 						// Passed pawns, taking into account that we are already giving points to advanced pawns.
 						//
-						// TODO: uncomment below and code this method
-//						if ( board.isPassedPawn( ( Pawn )piece ) ) {
-//							whiteHeuristicValue = whiteHeuristicValue + Constants.PASSED_PAWN;
-//						}
+						if (
+							fullMoveCounter >= Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER
+							&& board.isCandidateToBePassedPawn( ( Pawn )piece )
+						) {
+							whiteHeuristicValue = whiteHeuristicValue + Constants.CANDIDATE_PASSED_PAWN;
+						}
 					}
 				}
 				else if (
@@ -1430,10 +1434,10 @@ public class Engine extends com.miguel.games.entities.Engine {
 				Piece piece =
 					blackPieces.get( i );
 				
-				int squareId = piece.getSquare().getId();
+				int squareId = piece.getSquareId();
 				
 				blackHeuristicValue =
-					blackHeuristicValue + piece.getHeuristicValue();
+					blackHeuristicValue + piece.getHeuristicValue( fullMoveCounter );
 				
 				//
 				// A pawn or knight placed in the central squares 
@@ -1541,10 +1545,12 @@ public class Engine extends com.miguel.games.entities.Engine {
 						//
 						// Passed pawns, taking into account that we are already giving points to advanced pawns.
 						//
-						// TODO: uncomment below and code this method
-//						if ( board.isPassedPawn( ( Pawn )piece ) ) {
-//							blackHeuristicValue = blackHeuristicValue + Constants.PASSED_PAWN;
-//						}
+						if ( 
+							fullMoveCounter >= Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER
+							&& board.isCandidateToBePassedPawn( ( Pawn )piece )
+						) {
+							blackHeuristicValue = blackHeuristicValue + Constants.CANDIDATE_PASSED_PAWN;
+						}
 					}
 				}
 				else if (

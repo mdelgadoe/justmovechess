@@ -31,12 +31,14 @@ public class Queen extends Piece {
 	}
 	
 	@Override
-	public int getHeuristicValue() {
-		return Constants.QUEEN_VALUE;
+	public int getHeuristicValue( int fullMoveCounter ) {
+		return
+			( fullMoveCounter <= Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER ) ?
+			Constants.QUEEN_VALUE : Constants.ENDINGS_QUEEN_VALUE;
 	}
 	
 	@Override
-	public boolean isAttackingSquare(Square square, Board board) {
+	public boolean isAttackingSquareId(int squareId, Board board) {
 		
 		//
 		// A queen attacks every square in its row or column, and also in its diagonals, in 
@@ -49,13 +51,13 @@ public class Queen extends Piece {
 		// and the squares between them are empty
 		//
 		return
-			board.emptyRowOrColumnBetweenSquares(
-				this.getSquare(), 
-				square
+			board.emptyRowOrColumnBetweenSquaresIds(
+				this.getSquareId(), 
+				squareId
 			)
-			|| board.emptyDiagonalBetweenSquares(
-				this.getSquare(),
-				square
+			|| board.emptyDiagonalBetweenSquaresIds(
+				this.getSquareId(),
+				squareId
 			);
 		
 	}
@@ -72,21 +74,22 @@ public class Queen extends Piece {
 		Board board =
 			position.getBoard();
 		
-		int queenSquareId =
-			this.getSquare().getId();
+		int queenSquareId = this.getSquareId();
+		
+		int fullMoveCounter = position.getFullMoveCounter();
 		
 		//
 		// Normal queen's movements: rook + bishop possible squares
 		//	
-		ArrayList<Square> queenMovementsEndSquares =
-			board.getRookMovementEndSquares(
-				this.getSquare(),
+		ArrayList<Integer> queenMovementsEndSquares =
+			board.getRookMovementEndSquaresIds(
+				this.getSquareId(),
 				this.getColour()
 			);
 		
-		ArrayList<Square> bishopMovementsEndSquares =
-			board.getBishopMovementEndSquares(
-				this.getSquare(),
+		ArrayList<Integer> bishopMovementsEndSquares =
+			board.getBishopMovementEndSquaresIds(
+				this.getSquareId(),
 				this.getColour()
 			);
 		
@@ -106,18 +109,18 @@ public class Queen extends Piece {
 		//
 		
 		for ( 
-			Iterator<Square> iter = queenMovementsEndSquares.iterator();
+			Iterator<Integer> iter = queenMovementsEndSquares.iterator();
 			iter.hasNext();
 		) {
-			Square square = iter.next();
+			int squareId = iter.next();
 			
 			//
 			// We build the movement
 			//
 			Movement movement = new Movement();
 			
-			movement.setSquareStart( new Square( queenSquareId ) );
-			movement.setSquareEnd( square );
+			movement.setSquareStartId( queenSquareId );
+			movement.setSquareEndId( squareId );
 			movement.setPiece( this );
 			movement.setFormerHalfMoveClock(
 				position.getHalfMoveClock()
@@ -135,20 +138,20 @@ public class Queen extends Piece {
 				position.isBlackLongCastleAllowed()
 			);
 			
-			if ( ! board.isFreeSquare( square ) ) {
+			if ( ! board.isFreeSquareId( squareId ) ) {
 				
 				movement.setCapture( true );
 				
 				movement.setCapturedPiece(
-					board.getPieceByColourAndSquare(
+					board.getPieceByColourAndSquareId(
 						rivalColour,
-						square
+						squareId
 					)
 				);
 				
 				movement.setOrder(
-					Constants.GENERIC_CAPTURE_ORDER - movement.getCapturedPiece().getHeuristicValue()
-					+ this.getHeuristicValue()
+					Constants.GENERIC_CAPTURE_ORDER - movement.getCapturedPiece().getHeuristicValue( fullMoveCounter )
+					+ this.getHeuristicValue( fullMoveCounter )
 				);
 			}
 			else {
@@ -157,9 +160,9 @@ public class Queen extends Piece {
 			
 			if (
 				principalVariationMovement != null
-				&& movement.isAMovementDefinedByStartAndEndSquares(
-					( Square )( principalVariationMovement.getSquareStart() ),
-					( Square )( principalVariationMovement.getSquareEnd() ),
+				&& movement.isAMovementDefinedByStartAndEndSquaresIds(
+					principalVariationMovement.getSquareStartId(),
+					principalVariationMovement.getSquareEndId(),
 					principalVariationMovement.getPromotionChoicePiece()
 				)
 			) {

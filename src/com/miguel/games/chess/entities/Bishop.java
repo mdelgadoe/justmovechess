@@ -30,12 +30,14 @@ public class Bishop extends Piece {
 	}
 	
 	@Override
-	public int getHeuristicValue() {
-		return Constants.BISHOP_VALUE;
+	public int getHeuristicValue( int fullMoveCounter ) {
+		return
+			( fullMoveCounter <= Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER ) ?
+			Constants.BISHOP_VALUE : Constants.ENDINGS_BISHOP_VALUE;
 	}
 	
 	@Override
-	public boolean isAttackingSquare(Square square, Board board) {
+	public boolean isAttackingSquareId(int squareId, Board board) {
 		
 		//
 		// A bishop attacks every square in its diagonal, in 
@@ -48,9 +50,9 @@ public class Bishop extends Piece {
 		// and the squares between them are empty
 		//
 		return
-			board.emptyDiagonalBetweenSquares(
-				this.getSquare(),
-				square
+			board.emptyDiagonalBetweenSquaresIds(
+				this.getSquareId(),
+				squareId
 			);
 		
 	}
@@ -68,14 +70,16 @@ public class Bishop extends Piece {
 			position.getBoard();
 		
 		int bishopSquareId =
-			this.getSquare().getId();
+			this.getSquareId();
+		
+		int fullMoveCounter = position.getFullMoveCounter();
 		
 		//
 		// Normal bishop's movements
 		//		
-		ArrayList<Square> bishopMovementsEndSquares =
-			board.getBishopMovementEndSquares(
-				this.getSquare(),
+		ArrayList<Integer> bishopMovementsEndSquares =
+			board.getBishopMovementEndSquaresIds(
+				this.getSquareId(),
 				this.getColour()
 			);
 		
@@ -91,18 +95,18 @@ public class Bishop extends Piece {
 		//
 		
 		for ( 
-			Iterator<Square> iter = bishopMovementsEndSquares.iterator();
+			Iterator<Integer> iter = bishopMovementsEndSquares.iterator();
 			iter.hasNext();
 		) {
-			Square square = iter.next();
+			int squareId = iter.next();
 			
 			//
 			// We build the movement
 			//
 			Movement movement = new Movement();
 			
-			movement.setSquareStart( new Square( bishopSquareId ) );
-			movement.setSquareEnd( square );
+			movement.setSquareStartId( bishopSquareId );
+			movement.setSquareEndId( squareId );
 			movement.setPiece( this );
 			movement.setFormerHalfMoveClock(
 				position.getHalfMoveClock()
@@ -120,20 +124,20 @@ public class Bishop extends Piece {
 				position.isBlackLongCastleAllowed()
 			);
 			
-			if ( ! board.isFreeSquare( square ) ) {
+			if ( ! board.isFreeSquareId( squareId ) ) {
 				
 				movement.setCapture( true );
 				
 				movement.setCapturedPiece(
-					board.getPieceByColourAndSquare(
+					board.getPieceByColourAndSquareId(
 						rivalColour,
-						square
+						squareId
 					)
 				);
 				
 				movement.setOrder(
-					Constants.GENERIC_CAPTURE_ORDER - movement.getCapturedPiece().getHeuristicValue()
-					+ this.getHeuristicValue()
+					Constants.GENERIC_CAPTURE_ORDER - movement.getCapturedPiece().getHeuristicValue( fullMoveCounter )
+					+ this.getHeuristicValue( fullMoveCounter )
 				);
 			}
 			else {
@@ -142,9 +146,9 @@ public class Bishop extends Piece {
 			
 			if (
 				principalVariationMovement != null
-				&& movement.isAMovementDefinedByStartAndEndSquares(
-					( Square )( principalVariationMovement.getSquareStart() ),
-					( Square )( principalVariationMovement.getSquareEnd() ),
+				&& movement.isAMovementDefinedByStartAndEndSquaresIds(
+					principalVariationMovement.getSquareStartId(),
+					principalVariationMovement.getSquareEndId(),
 					principalVariationMovement.getPromotionChoicePiece()
 				)
 			) {
