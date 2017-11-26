@@ -5,7 +5,6 @@ package com.miguel.games.chess.entities;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 import com.miguel.games.chess.common.Constants;
 import com.miguel.games.chess.utils.MovementsComparator;
@@ -214,13 +213,7 @@ public class Position extends com.miguel.games.entities.Position {
 			result.setRookSquareStartId( 7 );
 			result.setRookSquareEndId( 5 );
 			result.setCastledRook(
-				( Rook )
-				( 
-					this.board.getPieceByColourAndSquareId(
-						Constants.WHITE_COLOUR, 
-						7
-					) 
-				)
+				( Rook )( this.board.getPieceBySquareId( 7 ) )
 			);
 		}
 		else {
@@ -229,13 +222,7 @@ public class Position extends com.miguel.games.entities.Position {
 			result.setRookSquareStartId( 63 );
 			result.setRookSquareEndId( 61 );
 			result.setCastledRook(
-				( Rook )
-				(
-					this.board.getPieceByColourAndSquareId(
-						Constants.BLACK_COLOUR, 
-						63
-					)
-				)
+				( Rook )( this.board.getPieceBySquareId( 63 ) )
 			);
 		}
 		
@@ -276,13 +263,7 @@ public class Position extends com.miguel.games.entities.Position {
 			result.setRookSquareStartId( 0 );
 			result.setRookSquareEndId( 3 );
 			result.setCastledRook(
-				( Rook )
-				(
-					this.board.getPieceByColourAndSquareId(
-						Constants.WHITE_COLOUR, 
-						0
-					)
-				)
+				( Rook )( this.board.getPieceBySquareId( 0 ) )
 			);
 		}
 		else {
@@ -291,13 +272,7 @@ public class Position extends com.miguel.games.entities.Position {
 			result.setRookSquareStartId( 56 );
 			result.setRookSquareEndId( 59 );
 			result.setCastledRook(
-				( Rook )
-				(
-					this.board.getPieceByColourAndSquareId(
-						Constants.BLACK_COLOUR, 
-						56
-					)
-				)
+				( Rook )(this.board.getPieceBySquareId( 56 ) )
 			);
 		}
 		
@@ -321,7 +296,7 @@ public class Position extends com.miguel.games.entities.Position {
 				&& ! king.isMoved() 
 			) {
 				Piece tentativeRook =
-					this.board.getPieceByColourAndSquareId( king.getColour(), 7 );
+					this.board.getPieceBySquareId( 7 );
 				
 				if (
 					tentativeRook != null
@@ -336,7 +311,7 @@ public class Position extends com.miguel.games.entities.Position {
 						&& this.board.isFreeSquareId( 6 )
 						&& ! this.isCheck( this.turn )
 						&& ! this.isAtLeastOnePieceAttackingSquareId( blackPieces, 5 )
-						&& ! this.isAtLeastOnePieceAttackingSquareId(	blackPieces, 6 );
+						&& ! this.isAtLeastOnePieceAttackingSquareId( blackPieces, 6 );
 				}
 			}
 		}
@@ -351,7 +326,7 @@ public class Position extends com.miguel.games.entities.Position {
 				&& ! king.isMoved() 
 			) {
 				Piece tentativeRook =
-					this.board.getPieceByColourAndSquareId( king.getColour(), 63 );
+					this.board.getPieceBySquareId( 63 );
 				
 				if (
 					tentativeRook != null
@@ -392,7 +367,7 @@ public class Position extends com.miguel.games.entities.Position {
 				&& ! king.isMoved() 
 			) {
 				Piece tentativeRook =
-					this.board.getPieceByColourAndSquareId( king.getColour(), 0 );
+					this.board.getPieceBySquareId( 0 );
 				
 				if (
 					tentativeRook != null
@@ -423,7 +398,7 @@ public class Position extends com.miguel.games.entities.Position {
 				&& ! king.isMoved() 
 			) {
 				Piece tentativeRook =
-					this.board.getPieceByColourAndSquareId( king.getColour(), 56 );
+					this.board.getPieceBySquareId( 56 );
 				
 				if (
 					tentativeRook != null
@@ -517,14 +492,9 @@ public class Position extends com.miguel.games.entities.Position {
 		
 		int squareEndId = movement.getSquareEndId();
 		
-		HashMap<Integer, Boolean> freeSquares = 
-			this.board.getFreeSquares();
+		Piece piece = ( Piece )movement.getPiece();
 		
-		Piece piece =
-			( Piece )movement.getPiece();
-		
-		int pieceColour =
-			piece.getColour();
+		int pieceColour = piece.getColour();
 		
 		//
 		// We mark the movement with the present enPassant, to be able to
@@ -584,16 +554,13 @@ public class Position extends com.miguel.games.entities.Position {
 				//
 				// We delete the promoted pawn
 				//
-				this.board.removePiece(
-					piece
-				);
+				this.board.removePiece(	piece );
 				
 				//
 				// And we add the new piece 
 				//
-				this.board.addPiece(
-					movement.getPromotionChoicePiece()
-				);
+				this.board.addPiece( movement.getPromotionChoicePiece()	);
+				this.board.setPieceOnMatrix( movement.getPromotionChoicePiece() );
 			}
 			
 		}
@@ -605,10 +572,12 @@ public class Position extends com.miguel.games.entities.Position {
 			this.halfMoveClock++;
 		}
 		
-		freeSquares.put( squareStartId, true );
-		freeSquares.remove( squareEndId );
+		this.board.setEmptySquareId( squareStartId );
 		
 		piece.setSquareId( squareEndId );
+		if ( ! movement.isPromotedPawn() ) {
+			this.board.setPieceOnMatrix( piece );
+		}
 		
 		if ( movement.isCastle() ) {
 			
@@ -618,29 +587,21 @@ public class Position extends com.miguel.games.entities.Position {
 			int rookSquareEndId =
 				movement.getRookSquareEndId();
 			
-			freeSquares.put( rookSquareStartId, true );
+			this.board.setEmptySquareId( rookSquareStartId );
 			
-			Rook castledRook = 
-				movement.getCastledRook();
+			Rook castledRook = movement.getCastledRook();
 			
 			castledRook.setSquareId( rookSquareEndId );
+			this.board.setPieceOnMatrix( castledRook );
 			castledRook.setMoved( true );
 			
-			freeSquares.remove( rookSquareEndId );
-			
-			King king =	
-				( King )piece;
-			
-			king.setCastled( true );
-			
+			( ( King )piece ).setCastled( true );
 		}
 		else if ( movement.isCapture() ) {
 			//
 			// We have to delete the captured piece
 			//
-			this.board.removePiece(
-				movement.getCapturedPiece()
-			);
+			this.board.removePiece(	movement.getCapturedPiece()	);
 			
 			this.halfMoveClock = 0;
 		}
@@ -649,17 +610,13 @@ public class Position extends com.miguel.games.entities.Position {
 			//
 			// We make the captured pawn square free
 			//
-			Piece capturedPiece = 
-				movement.getCapturedPiece();
-			
-			freeSquares.put( capturedPiece.getSquareId(), true );
+			Piece capturedPiece = movement.getCapturedPiece();
 			
 			//
 			// And we have to delete the captured piece
 			//
-			this.board.removePiece(
-				capturedPiece
-			);
+			this.board.removePiece(	capturedPiece );
+			this.board.setEmptySquareId( capturedPiece.getSquareId() );
 		}
 		
 		//
@@ -676,29 +633,15 @@ public class Position extends com.miguel.games.entities.Position {
 		// regarding the castle permissions.
 		//
 		if ( this.whiteShortCastleAllowed ) {
-			
-			King whiteKing =
-				this.board.getKing(
-					Constants.WHITE_COLOUR
-				);
-			
-			Piece tentativeRook =
-				this.board.getPieceByColourAndSquareId( 
-					Constants.WHITE_COLOUR, 
-					7
-				);
+			Piece tentativeRook = this.board.getPieceBySquareId( 7 );
 			
 			if (
 				tentativeRook != null
 				&& tentativeRook instanceof Rook
 			) {
-				
-				Rook rook =
-					( Rook )tentativeRook;
-				
 				this.whiteShortCastleAllowed =
-					! whiteKing.isMoved()
-					&& ! rook.isMoved();
+					( ! this.board.getKing( Constants.WHITE_COLOUR ).isMoved() )
+					&& ( ! ( ( Rook )tentativeRook ).isMoved() );
 			}
 			else {
 				this.whiteShortCastleAllowed = false;
@@ -706,29 +649,15 @@ public class Position extends com.miguel.games.entities.Position {
 		}
 		
 		if ( this.whiteLongCastleAllowed ) {
-			
-			King whiteKing =
-				this.board.getKing(
-					Constants.WHITE_COLOUR
-				);
-			
-			Piece tentativeRook =
-				this.board.getPieceByColourAndSquareId( 
-					Constants.WHITE_COLOUR, 
-					0
-				);
+			Piece tentativeRook = this.board.getPieceBySquareId( 0 );
 			
 			if (
 				tentativeRook != null
 				&& tentativeRook instanceof Rook
 			) {
-				
-				Rook rook =
-					( Rook )tentativeRook;
-				
 				this.whiteLongCastleAllowed =
-					! whiteKing.isMoved()
-					&& ! rook.isMoved();
+					( ! this.board.getKing( Constants.WHITE_COLOUR ).isMoved() )
+					&& ( ! ( ( Rook )tentativeRook ).isMoved() );
 			}
 			else {
 				this.whiteLongCastleAllowed = false;
@@ -736,29 +665,15 @@ public class Position extends com.miguel.games.entities.Position {
 		}
 		
 		if ( this.blackShortCastleAllowed ) {
-			
-			King blackKing =
-				this.board.getKing(
-					Constants.BLACK_COLOUR
-				);
-			
-			Piece tentativeRook =
-				this.board.getPieceByColourAndSquareId( 
-					Constants.BLACK_COLOUR, 
-					63
-				);
+			Piece tentativeRook = this.board.getPieceBySquareId( 63 );
 			
 			if (
 				tentativeRook != null
 				&& tentativeRook instanceof Rook
 			) {
-				
-				Rook rook =
-					( Rook )tentativeRook;
-				
 				this.blackShortCastleAllowed =
-					! blackKing.isMoved()
-					&& ! rook.isMoved();
+					( ! this.board.getKing(	Constants.BLACK_COLOUR ).isMoved() )
+					&& ( ! ( ( Rook )tentativeRook ).isMoved() );
 			}
 			else {
 				this.blackShortCastleAllowed = false;
@@ -766,29 +681,15 @@ public class Position extends com.miguel.games.entities.Position {
 		}
 		
 		if ( this.blackLongCastleAllowed ) {
-			
-			King blackKing =
-				this.board.getKing(
-					Constants.BLACK_COLOUR
-				);
-			
-			Piece tentativeRook =
-				this.board.getPieceByColourAndSquareId( 
-					Constants.BLACK_COLOUR, 
-					56
-				);
+			Piece tentativeRook = this.board.getPieceBySquareId( 56 );
 			
 			if (
 				tentativeRook != null
 				&& tentativeRook instanceof Rook
 			) {
-				
-				Rook rook =
-					( Rook )tentativeRook;
-				
 				this.blackLongCastleAllowed =
-					! blackKing.isMoved()
-					&& ! rook.isMoved();
+					( ! this.board.getKing(	Constants.BLACK_COLOUR ).isMoved() )
+					&& ( ! ( ( Rook )tentativeRook ).isMoved() );
 			}
 			else {
 				this.blackLongCastleAllowed = false;
@@ -804,14 +705,9 @@ public class Position extends com.miguel.games.entities.Position {
 		
 		int squareEndId = movement.getSquareEndId();
 		
-		HashMap<Integer, Boolean> freeSquares = 
-			this.board.getFreeSquares();
+		Piece piece = ( Piece )movement.getPiece();
 		
-		Piece piece =
-			( Piece )movement.getPiece();
-		
-		int pieceColour =
-			piece.getColour();
+		int pieceColour = piece.getColour();
 		
 		//
 		// When reversing the movement, we recover the former 
@@ -844,23 +740,18 @@ public class Position extends com.miguel.games.entities.Position {
 			}
 		}
 		
-		freeSquares.remove( squareStartId );
-		
 		piece.setSquareId( squareStartId );
+		this.board.setPieceOnMatrix( piece );
 		
-		freeSquares.put( squareEndId, true );
+		this.board.setEmptySquareId( squareEndId );
 		
 		if ( movement.isCastle() ) {
-			
-			int rookStartSquareId = 
-				movement.getRookSquareStartId();
-			
-			freeSquares.remove( rookStartSquareId );
-			freeSquares.put( movement.getRookSquareEndId(), true );
+			this.board.setEmptySquareId( movement.getRookSquareEndId() );
 			
 			Rook castledRook = movement.getCastledRook();
 			
-			castledRook.setSquareId( rookStartSquareId );
+			castledRook.setSquareId( movement.getRookSquareStartId() );
+			this.board.setPieceOnMatrix( castledRook );
 			castledRook.setMoved( false );
 			
 			( ( King )piece ).setCastled( false );
@@ -869,27 +760,21 @@ public class Position extends com.miguel.games.entities.Position {
 			//
 			// We have to add the former captured piece
 			//
-			this.board.addPiece(
-				movement.getCapturedPiece()
-			);
-			
-			freeSquares.remove( squareEndId );
-			
+			this.board.addPiece( movement.getCapturedPiece() );
+			this.board.setPieceOnMatrix( movement.getCapturedPiece() );
 		}
 		else if ( movement.isEnPassant() ) {
 			
 			//
 			// We mark as not free the former captured pawn square
 			//
-			Piece capturedPiece = 
-				movement.getCapturedPiece();
-			
-			freeSquares.remove( capturedPiece.getSquareId() );
+			Piece capturedPiece = movement.getCapturedPiece();
 			
 			//
 			// And we have to add the former captured piece
 			//
 			this.board.addPiece( capturedPiece );
+			this.board.setPieceOnMatrix( capturedPiece );
 		}
 		
 		//
@@ -901,7 +786,7 @@ public class Position extends com.miguel.games.entities.Position {
 				//
 				// We mark as free the end square
 				//
-				freeSquares.put( squareEndId, true );
+				this.board.setEmptySquareId( squareEndId );
 			}
 			
 			//
@@ -911,13 +796,12 @@ public class Position extends com.miguel.games.entities.Position {
 			// movements to be generated again as we walk through the pieces
 			//
 			this.board.addPiece( piece, 1 );
+			this.board.setPieceOnMatrix( piece );
 			
 			//
 			// And we delete the promotion choice piece 
 			//
-			this.board.removePiece(
-				movement.getPromotionChoicePiece()
-			);
+			this.board.removePiece(	movement.getPromotionChoicePiece() );
 		}
 		
 		//
@@ -969,11 +853,6 @@ public class Position extends com.miguel.games.entities.Position {
 			? enPassantTargetSquareId - 8
 			: enPassantTargetSquareId + 8;
 		
-		int rivalPawnsColour =
-			( pawnColour == Constants.WHITE_COLOUR )
-			? Constants.BLACK_COLOUR
-			: Constants.WHITE_COLOUR;
-		
 		Movement result = 
 			new Movement();
 		
@@ -982,10 +861,7 @@ public class Position extends com.miguel.games.entities.Position {
 		result.setSquareEndId( enPassantTargetSquareId );
 		result.setPiece( pawn );
 		result.setCapturedPiece(
-			this.board.getPieceByColourAndSquareId(
-				rivalPawnsColour, 
-				capturedPieceSquareId
-			)
+			this.board.getPieceBySquareId( capturedPieceSquareId )
 		);
 		result.setFormerHalfMoveClock(
 			this.halfMoveClock

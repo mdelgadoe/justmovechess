@@ -208,10 +208,6 @@ public class FenUtilities {
 			rowIndex--;
 		}
 		
-		result.getBoard().setFreeSquares(
-			freeSquares
-		);
-		
 		result.getBoard().setWhitePieces(
 			whitePieces 
 		);

@@ -110,7 +110,7 @@ public class Game {
 					
 					position.setResult( Constants.DRAW );
 				}
-					
+				
 				Engine.evaluatePositionVersionOne(
 					position,
 					position.getTurn(),

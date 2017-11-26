@@ -163,11 +163,6 @@ public class Pawn extends Piece {
 		// Of course, every movement has to be reversed in the position
 		//
 		
-		int rivalColour =
-			( pawnColour == Constants.WHITE_COLOUR )
-			? Constants.BLACK_COLOUR
-			: Constants.WHITE_COLOUR;
-		
 		int promotionChoiceIndex = 0;
 		
 		for ( 
@@ -207,10 +202,7 @@ public class Pawn extends Piece {
 				movement.setCapture( true );
 				
 				movement.setCapturedPiece(
-					board.getPieceByColourAndSquareId(
-						rivalColour,
-						squareId
-					)
+					board.getPieceBySquareId( squareId )
 				);
 				
 				movement.setOrder(

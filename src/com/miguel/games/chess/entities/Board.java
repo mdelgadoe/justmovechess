@@ -4,7 +4,6 @@
 package com.miguel.games.chess.entities;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.miguel.games.chess.common.Constants;
 
@@ -13,11 +12,15 @@ import com.miguel.games.chess.common.Constants;
  *
  */
 public class Board extends com.miguel.games.entities.Board {
+	
+	private static final int MATRIX_NUMBER_OF_SQUARES = 64;
 
+	// Pieces
 	private ArrayList<Piece> whitePieces;
 	private ArrayList<Piece> blackPieces;
 	
-	private HashMap<Integer, Boolean> freeSquares;
+	// Board
+	private Piece[] matrix;
 	
 	//
 	// Central squares. It is considered important to occupy or attack them in the opening
@@ -30,47 +33,9 @@ public class Board extends com.miguel.games.entities.Board {
 	public void initialize() {
 		
 		//
-		// Free squares
-		// 
-		
-		freeSquares =
-			new HashMap<Integer, Boolean>();
-		
-		freeSquares.put( 16, true );
-		freeSquares.put( 17, true );
-		freeSquares.put( 18, true );
-		freeSquares.put( 19, true );
-		freeSquares.put( 20, true );
-		freeSquares.put( 21, true );
-		freeSquares.put( 22, true );
-		freeSquares.put( 23, true );
-		
-		freeSquares.put( 24, true );
-		freeSquares.put( 25, true );
-		freeSquares.put( 26, true );
-		freeSquares.put( 27, true );
-		freeSquares.put( 28, true );
-		freeSquares.put( 29, true );
-		freeSquares.put( 30, true );
-		freeSquares.put( 31, true );
-		
-		freeSquares.put( 32, true );
-		freeSquares.put( 33, true );
-		freeSquares.put( 34, true );
-		freeSquares.put( 35, true );
-		freeSquares.put( 36, true );
-		freeSquares.put( 37, true );
-		freeSquares.put( 38, true );
-		freeSquares.put( 39, true );
-		
-		freeSquares.put( 40, true );
-		freeSquares.put( 41, true );
-		freeSquares.put( 42, true );
-		freeSquares.put( 43, true );
-		freeSquares.put( 44, true );
-		freeSquares.put( 45, true );
-		freeSquares.put( 46, true );
-		freeSquares.put( 47, true );
+		// Matrix board
+		//
+		matrix = new Piece[MATRIX_NUMBER_OF_SQUARES];
 		
 		//
 		// White pieces
@@ -79,27 +44,59 @@ public class Board extends com.miguel.games.entities.Board {
 		whitePieces =
 			new ArrayList<Piece>();
 		
-		whitePieces.add( 0, new King( Constants.WHITE_COLOUR, 4 ) );
+		King e1King = new King( Constants.WHITE_COLOUR, 4 );
+		whitePieces.add( 0, e1King );
+		matrix[4] = e1King;
 		
-		whitePieces.add( 1, new Pawn( Constants.WHITE_COLOUR, 8 ) );
-		whitePieces.add( 2, new Pawn( Constants.WHITE_COLOUR, 9 ) );
-		whitePieces.add( 3, new Pawn( Constants.WHITE_COLOUR, 10 ) );
-		whitePieces.add( 4, new Pawn( Constants.WHITE_COLOUR, 11 ) );
-		whitePieces.add( 5, new Pawn( Constants.WHITE_COLOUR, 12 ) );
-		whitePieces.add( 6, new Pawn( Constants.WHITE_COLOUR, 13 ) );
-		whitePieces.add( 7, new Pawn( Constants.WHITE_COLOUR, 14 ) );
-		whitePieces.add( 8, new Pawn( Constants.WHITE_COLOUR, 15 ) );
+		Pawn a2Pawn = new Pawn( Constants.WHITE_COLOUR, 8 );
+		whitePieces.add( 1, a2Pawn );
+		matrix[8] = a2Pawn;
+		Pawn b2Pawn = new Pawn( Constants.WHITE_COLOUR, 9 );
+		whitePieces.add( 2, b2Pawn );
+		matrix[9] = b2Pawn;
+		Pawn c2Pawn = new Pawn( Constants.WHITE_COLOUR, 10 );
+		whitePieces.add( 2, c2Pawn );
+		matrix[10] = c2Pawn;
+		Pawn d2Pawn = new Pawn( Constants.WHITE_COLOUR, 11 );
+		whitePieces.add( 4, d2Pawn );
+		matrix[11] = d2Pawn;
+		Pawn e2Pawn = new Pawn( Constants.WHITE_COLOUR, 12 );
+		whitePieces.add( 5, e2Pawn );
+		matrix[12] = e2Pawn;
+		Pawn f2Pawn = new Pawn( Constants.WHITE_COLOUR, 13 );
+		whitePieces.add( 6, f2Pawn );
+		matrix[13] = f2Pawn;
+		Pawn g2Pawn = new Pawn( Constants.WHITE_COLOUR, 14 );
+		whitePieces.add( 7, g2Pawn );
+		matrix[14] = g2Pawn;
+		Pawn h2Pawn = new Pawn( Constants.WHITE_COLOUR, 15 );
+		whitePieces.add( 8, h2Pawn );
+		matrix[15] = h2Pawn;
 		
-		whitePieces.add( 9, new Knight( Constants.WHITE_COLOUR, 1 ) );
-		whitePieces.add( 10, new Knight( Constants.WHITE_COLOUR, 6 ) );
+		Knight b1Knight = new Knight( Constants.WHITE_COLOUR, 1 );
+		whitePieces.add( 9, b1Knight );
+		matrix[1] = b1Knight;
+		Knight g1Pawn = new Knight( Constants.WHITE_COLOUR, 6 );
+		whitePieces.add( 10, g1Pawn );
+		matrix[6] = g1Pawn;
 		
-		whitePieces.add( 11, new Bishop( Constants.WHITE_COLOUR, 2 ) );
-		whitePieces.add( 12, new Bishop( Constants.WHITE_COLOUR, 5 ) );
+		Bishop c1Bishop = new Bishop( Constants.WHITE_COLOUR, 2 );
+		whitePieces.add( 11, c1Bishop );
+		matrix[2] = c1Bishop;
+		Bishop f1Bishop = new Bishop( Constants.WHITE_COLOUR, 5 );
+		whitePieces.add( 12, f1Bishop );
+		matrix[5] = f1Bishop;
 		
-		whitePieces.add( 13, new Rook( Constants.WHITE_COLOUR, 0 ) );
-		whitePieces.add( 14, new Rook( Constants.WHITE_COLOUR, 7 ) );
+		Rook a1Rook = new Rook( Constants.WHITE_COLOUR, 0 );
+		whitePieces.add( 13, a1Rook );
+		matrix[0] = a1Rook;
+		Rook h1Rook = new Rook( Constants.WHITE_COLOUR, 7 );
+		whitePieces.add( 14, h1Rook );
+		matrix[7] = h1Rook;
 		
-		whitePieces.add( 15, new Queen( Constants.WHITE_COLOUR, 3 ) );
+		Queen d1Queen = new Queen( Constants.WHITE_COLOUR, 3 );
+		whitePieces.add( 15, d1Queen );
+		matrix[3] = d1Queen;
 		
 		//
 		// Black pieces
@@ -108,28 +105,67 @@ public class Board extends com.miguel.games.entities.Board {
 		blackPieces =
 			new ArrayList<Piece>();
 		
-		blackPieces.add( 0, new King( Constants.BLACK_COLOUR, 60 ) );
+		King e8King = new King( Constants.BLACK_COLOUR, 60 );
+		blackPieces.add( 0, e8King );
+		matrix[60] = e8King;
 		
-		blackPieces.add( 1, new Pawn( Constants.BLACK_COLOUR, 48 ) );
-		blackPieces.add( 2, new Pawn( Constants.BLACK_COLOUR, 49 ) );
-		blackPieces.add( 3, new Pawn( Constants.BLACK_COLOUR, 50 ) );
-		blackPieces.add( 4, new Pawn( Constants.BLACK_COLOUR, 51 ) );
-		blackPieces.add( 5, new Pawn( Constants.BLACK_COLOUR, 52 ) );
-		blackPieces.add( 6, new Pawn( Constants.BLACK_COLOUR, 53 ) );
-		blackPieces.add( 7, new Pawn( Constants.BLACK_COLOUR, 54 ) );
-		blackPieces.add( 8, new Pawn( Constants.BLACK_COLOUR, 55 ) );
+		Pawn a7Pawn = new Pawn( Constants.BLACK_COLOUR, 48 );
+		blackPieces.add( 1, a7Pawn );
+		matrix[48] = a7Pawn;
+		Pawn b7Pawn = new Pawn( Constants.BLACK_COLOUR, 49 );
+		blackPieces.add( 2, b7Pawn );
+		matrix[49] = b7Pawn;
+		Pawn c7Pawn = new Pawn( Constants.BLACK_COLOUR, 50 );
+		blackPieces.add( 3, c7Pawn );
+		matrix[50] = c7Pawn;
+		Pawn d7Pawn = new Pawn( Constants.BLACK_COLOUR, 51 );
+		blackPieces.add( 4, d7Pawn );
+		matrix[51] = d7Pawn;
+		Pawn e7Pawn = new Pawn( Constants.BLACK_COLOUR, 52 );
+		blackPieces.add( 5, e7Pawn );
+		matrix[52] = e7Pawn;
+		Pawn f7Pawn = new Pawn( Constants.BLACK_COLOUR, 53 );
+		blackPieces.add( 6, f7Pawn );
+		matrix[53] = f7Pawn;
+		Pawn g7Pawn = new Pawn( Constants.BLACK_COLOUR, 54 );
+		blackPieces.add( 7, g7Pawn );
+		matrix[54] = g7Pawn;
+		Pawn h7Pawn = new Pawn( Constants.BLACK_COLOUR, 55 );
+		blackPieces.add( 8, h7Pawn );
+		matrix[55] = h7Pawn;
 		
-		blackPieces.add( 9, new Knight( Constants.BLACK_COLOUR, 57 ) );
-		blackPieces.add( 10, new Knight( Constants.BLACK_COLOUR, 62 ) );
+		Knight b8Knight = new Knight( Constants.BLACK_COLOUR, 57 );
+		blackPieces.add( 9, b8Knight );
+		matrix[57] = b8Knight;
+		Knight g8Knight = new Knight( Constants.BLACK_COLOUR, 62 );
+		blackPieces.add( 10, g8Knight );
+		matrix[62] = g8Knight;
 		
-		blackPieces.add( 11, new Bishop( Constants.BLACK_COLOUR, 58 ) );
-		blackPieces.add( 12, new Bishop( Constants.BLACK_COLOUR, 61 ) );
+		Bishop c8Bishop = new Bishop( Constants.BLACK_COLOUR, 58 );
+		blackPieces.add( 11, c8Bishop );
+		matrix[58] = c8Bishop;
+		Bishop f8Bishop = new Bishop( Constants.BLACK_COLOUR, 61 );
+		blackPieces.add( 12, f8Bishop );
+		matrix[61] = f8Bishop;
 		
-		blackPieces.add( 13, new Rook( Constants.BLACK_COLOUR, 56 ) );
-		blackPieces.add( 14, new Rook( Constants.BLACK_COLOUR, 63 ) );
+		Rook a8Rook = new Rook( Constants.BLACK_COLOUR, 56 );
+		blackPieces.add( 13, a8Rook );
+		matrix[56] = a8Rook;
+		Rook h8Rook = new Rook( Constants.BLACK_COLOUR, 63 );
+		blackPieces.add( 14, h8Rook );
+		matrix[63] = h8Rook;
 		
-		blackPieces.add( 15, new Queen( Constants.BLACK_COLOUR, 59 ) );
-		
+		Queen d8Queen = new Queen( Constants.BLACK_COLOUR, 59 );
+		blackPieces.add( 15, d8Queen );
+		matrix[59] = d8Queen;
+	}
+	
+	public void setEmptySquareId( int squareId ) {
+		matrix[squareId] = null;
+	}
+	
+	public void setPieceOnMatrix( Piece piece ) {
+		matrix[piece.getSquareId()] = piece;
 	}
 	
 	@Override
@@ -140,25 +176,8 @@ public class Board extends com.miguel.games.entities.Board {
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
 			if ( ! this.isFreeSquareId( i ) ) {
-				
-				Piece piece =
-					this.getPieceByColourAndSquareId(
-						Constants.WHITE_COLOUR,
-						i
-					);
-				
-				if ( piece != null ) {
-					whatToPrint = piece.toString() + " ";
-				}
-				else {
-					piece =
-						this.getPieceByColourAndSquareId(
-							Constants.BLACK_COLOUR,
-							i
-						);
-
-					whatToPrint = piece.toString() + " ";
-				}
+				Piece piece = this.getPieceBySquareId( i );
+				whatToPrint = piece.toString() + " ";
 			}
 			
 			System.out.print( whatToPrint );
@@ -171,25 +190,8 @@ public class Board extends com.miguel.games.entities.Board {
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
 			if ( ! this.isFreeSquareId( i ) ) {
-				
-				Piece piece =
-					this.getPieceByColourAndSquareId(
-						Constants.WHITE_COLOUR,
-						i
-					);
-				
-				if ( piece != null ) {
-					whatToPrint = piece.toString() + " ";
-				}
-				else {
-					piece =
-						this.getPieceByColourAndSquareId(
-							Constants.BLACK_COLOUR,
-							i
-						);
-					
-					whatToPrint = piece.toString() + " ";
-				}
+				Piece piece = this.getPieceBySquareId( i );
+				whatToPrint = piece.toString() + " ";
 			}
 			
 			System.out.print( whatToPrint );
@@ -202,25 +204,8 @@ public class Board extends com.miguel.games.entities.Board {
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
 			if ( ! this.isFreeSquareId( i ) ) {
-				
-				Piece piece =
-					this.getPieceByColourAndSquareId(
-						Constants.WHITE_COLOUR,
-						i
-					);
-				
-				if ( piece != null ) {
-					whatToPrint = piece.toString() + " ";
-				}
-				else {
-					piece =
-						this.getPieceByColourAndSquareId(
-							Constants.BLACK_COLOUR,
-							i
-						);
-					
-					whatToPrint = piece.toString() + " ";
-				}
+				Piece piece = this.getPieceBySquareId( i );
+				whatToPrint = piece.toString() + " ";
 			}
 			
 			System.out.print( whatToPrint );
@@ -233,25 +218,8 @@ public class Board extends com.miguel.games.entities.Board {
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
 			if ( ! this.isFreeSquareId( i ) ) {
-				
-				Piece piece =
-					this.getPieceByColourAndSquareId(
-						Constants.WHITE_COLOUR,
-						i
-					);
-				
-				if ( piece != null ) {
-					whatToPrint = piece.toString() + " ";
-				}
-				else {
-					piece =
-						this.getPieceByColourAndSquareId(
-							Constants.BLACK_COLOUR,
-							i
-						);
-					
-					whatToPrint = piece.toString() + " ";
-				}
+				Piece piece = this.getPieceBySquareId( i );
+				whatToPrint = piece.toString() + " ";
 			}
 			
 			System.out.print( whatToPrint );
@@ -264,25 +232,8 @@ public class Board extends com.miguel.games.entities.Board {
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
 			if ( ! this.isFreeSquareId( i ) ) {
-				
-				Piece piece =
-					this.getPieceByColourAndSquareId(
-						Constants.WHITE_COLOUR,
-						i
-					);
-				
-				if ( piece != null ) {
-					whatToPrint = piece.toString() + " ";
-				}
-				else {
-					piece =
-						this.getPieceByColourAndSquareId(
-							Constants.BLACK_COLOUR,
-							i
-						);
-					
-					whatToPrint = piece.toString() + " ";
-				}
+				Piece piece = this.getPieceBySquareId( i );
+				whatToPrint = piece.toString() + " ";
 			}
 			
 			System.out.print( whatToPrint );
@@ -295,25 +246,8 @@ public class Board extends com.miguel.games.entities.Board {
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
 			if ( ! this.isFreeSquareId( i ) ) {
-				
-				Piece piece =
-					this.getPieceByColourAndSquareId(
-						Constants.WHITE_COLOUR,
-						i
-					);
-				
-				if ( piece != null ) {
-					whatToPrint = piece.toString() + " ";
-				}
-				else {
-					piece =
-						this.getPieceByColourAndSquareId(
-							Constants.BLACK_COLOUR,
-							i
-						);
-					
-					whatToPrint = piece.toString() + " ";
-				}
+				Piece piece = this.getPieceBySquareId( i );
+				whatToPrint = piece.toString() + " ";
 			}
 			
 			System.out.print( whatToPrint );
@@ -326,25 +260,8 @@ public class Board extends com.miguel.games.entities.Board {
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
 			if ( ! this.isFreeSquareId( i ) ) {
-				
-				Piece piece =
-					this.getPieceByColourAndSquareId(
-						Constants.WHITE_COLOUR,
-						i
-					);
-				
-				if ( piece != null ) {
-					whatToPrint = piece.toString() + " ";
-				}
-				else {
-					piece =
-						this.getPieceByColourAndSquareId(
-							Constants.BLACK_COLOUR,
-							i
-						);
-					
-					whatToPrint = piece.toString() + " ";
-				}
+				Piece piece = this.getPieceBySquareId( i );
+				whatToPrint = piece.toString() + " ";
 			}
 			
 			System.out.print( whatToPrint );
@@ -357,25 +274,8 @@ public class Board extends com.miguel.games.entities.Board {
 			String whatToPrint = Constants.EMPTY_SQUARE_VISUALIZE + " ";
 			
 			if ( ! this.isFreeSquareId( i ) ) {
-				
-				Piece piece =
-					this.getPieceByColourAndSquareId(
-						Constants.WHITE_COLOUR,
-						i
-					);
-				
-				if ( piece != null ) {
-					whatToPrint = piece.toString() + " ";
-				}
-				else {
-					piece =
-						this.getPieceByColourAndSquareId(
-							Constants.BLACK_COLOUR,
-							i
-						);
-					
-					whatToPrint = piece.toString() + " ";
-				}
+				Piece piece = this.getPieceBySquareId( i );
+				whatToPrint = piece.toString() + " ";
 			}
 			
 			System.out.print( whatToPrint );
@@ -448,36 +348,40 @@ public class Board extends com.miguel.games.entities.Board {
 		int squareStartId, 
 		int squareEndId
 	) {
-
 		boolean result = false;
 		
 		//
-		// First, we need to know if the squares are in the same row
-		// or in the same column, to perform further operations
+		// If it is the same square, we choose to return false. It is a kind of extreme situation, i would say
 		//
-		
-		if ( squareStartId % 8 == squareEndId % 8 ) {
+		if ( squareStartId != squareEndId ) {
 			//
-			// Squares are in the same column. We check then if the straight way is free
+			// First, we need to know if the squares are in the same row
+			// or in the same column, to perform further operations
 			//
-			result = true;
 			
-			int maxSquareId = Math.max( squareStartId, squareEndId );
-			
-			for ( int i = Math.min( squareStartId, squareEndId ) + 8; result && i != maxSquareId; i = i + 8 ) {
-				result = this.isFreeSquareId( i );
+			if ( squareStartId % 8 == squareEndId % 8 ) {
+				//
+				// Squares are in the same column. We check then if the straight way is free
+				//
+				result = true;
+				
+				int maxSquareId = Math.max( squareStartId, squareEndId );
+				
+				for ( int i = Math.min( squareStartId, squareEndId ) + 8; result && i != maxSquareId; i = i + 8 ) {
+					result = this.isFreeSquareId( i );
+				}
 			}
-		}
-		else if ( squareStartId / 8 == squareEndId / 8 ) {
-			//
-			// Squares are in the same row. We check then if the straight way is free
-			//
-			result = true;
-			
-			int maxSquareId = Math.max( squareStartId, squareEndId );
-			
-			for ( int i = Math.min( squareStartId, squareEndId ) + 1; result && i != maxSquareId; i = i + 1 ) {
-				result = this.isFreeSquareId( i );
+			else if ( squareStartId / 8 == squareEndId / 8 ) {
+				//
+				// Squares are in the same row. We check then if the straight way is free
+				//
+				result = true;
+				
+				int maxSquareId = Math.max( squareStartId, squareEndId );
+				
+				for ( int i = Math.min( squareStartId, squareEndId ) + 1; result && i != maxSquareId; i = i + 1 ) {
+					result = this.isFreeSquareId( i );
+				}
 			}
 		}
 		
@@ -488,44 +392,49 @@ public class Board extends com.miguel.games.entities.Board {
 		int squareStartId,
 		int squareEndId
 	) {
-		
 		boolean result = false;
 		
 		//
-		// First, we check that both squares are in a diagonal
+		// If it is the same square, we choose to return false. It is an extreme situation, i would say
 		//
+		if ( squareStartId != squareEndId ) {
 		
-		int columnDifference =
-			squareEndId % 8 - squareStartId % 8;
-		
-		int rowDifference =
-			squareEndId / 8 - squareStartId / 8;
-		
-		result = 
-			Math.abs( columnDifference ) == Math.abs( rowDifference );
-		
-		if ( result ) {
-			
 			//
-			// If so, we perform further operations to check if the squares
-			// that are between our two squares are free
+			// First, we check that both squares are in a diagonal
 			//
 			
-			int addValue = 9;  // By default, one of the possible values
+			int columnDifference =
+				squareEndId % 8 - squareStartId % 8;
 			
-			if ( columnDifference > 0 && rowDifference < 0 ) {
-				addValue = -7;
-			}
-			else if ( columnDifference < 0 && rowDifference > 0 ) {
-				addValue = 7;
-			}
-			else if ( columnDifference < 0 && rowDifference < 0 ) {
-				addValue = -9;
-			}
+			int rowDifference =
+				squareEndId / 8 - squareStartId / 8;
 			
-			for ( int i = squareStartId + addValue; result && i != squareEndId; i = i + addValue ) {
-				result = this.isFreeSquareId( i );
+			result = Math.abs( columnDifference ) == Math.abs( rowDifference );
+			
+			if ( result ) {
+				
+				//
+				// If so, we perform further operations to check if the squares
+				// that are between our two squares are free
+				//
+				
+				int addValue = 9;  // By default, one of the possible values
+				
+				if ( columnDifference > 0 && rowDifference < 0 ) {
+					addValue = -7;
+				}
+				else if ( columnDifference < 0 && rowDifference > 0 ) {
+					addValue = 7;
+				}
+				else if ( columnDifference < 0 && rowDifference < 0 ) {
+					addValue = -9;
+				}
+				
+				for ( int i = squareStartId + addValue; result && i != squareEndId; i = i + addValue ) {
+					result = this.isFreeSquareId( i );
+				}
 			}
+		
 		}
 		
 		return result;
@@ -556,29 +465,17 @@ public class Board extends com.miguel.games.entities.Board {
 	}
 
 	public boolean isFreeSquareId( int squareId ) {
-		return this.freeSquares.containsKey( squareId );
+		return ( this.matrix[squareId] == null );
 	}
 	
 	public boolean isSquareIdOccupiedByPieceByColour(
 		int squareId,
 		int colour
 	) {
-		boolean result = false;
-		
-		ArrayList<Piece> pieces =
-			( colour == Constants.WHITE_COLOUR ) 
-			? this.whitePieces 
-			: this.blackPieces;
-		
-		int sizePieces =
-			pieces.size();
-		
-		for ( int i = 0; ! result && i < sizePieces; i++ ) {
-			result =
-				pieces.get( i ).getSquareId() == squareId;
-		}
-		
-		return result;
+		return (
+			this.matrix[squareId] != null
+			&& this.matrix[squareId].getColour() == colour
+		);
 	}
 	
 	public ArrayList<Integer> getKingMovementEndSquaresIds(
@@ -731,10 +628,7 @@ public class Board extends com.miguel.games.entities.Board {
 			
 		if ( 
 			columnStart > 0 
-			&& this.getPieceByColourAndSquareId(
-				rivalColour,
-				squareStartId + valueToAddLeftSide
-			) != null 
+			&& this.isSquareIdOccupiedByPieceByColour( squareStartId + valueToAddLeftSide, rivalColour )
 		) {
 			//
 			// Diagonal-left
@@ -755,10 +649,7 @@ public class Board extends com.miguel.games.entities.Board {
 		
 		if ( 
 			columnStart < 7 
-			&& this.getPieceByColourAndSquareId(
-				rivalColour,
-				squareStartId + valueToAddRightSide
-			) != null
+			&& this.isSquareIdOccupiedByPieceByColour( squareStartId + valueToAddRightSide, rivalColour )
 		) {
 			//
 			// Diagonal-right
@@ -810,25 +701,26 @@ public class Board extends com.miguel.games.entities.Board {
 		//
 		// Then we try the 2 squares initial advance, if it is possible
 		//
-		int valueToAddInitialDoubleAdvance =
-			( colour == Constants.WHITE_COLOUR )
-			? 16
-			: -16;
-		
-		boolean appropiateRowForInitialDoubleAdvance =
-			( colour == Constants.WHITE_COLOUR )
-			? rowStart == 1
-			: rowStart == 6;
-		
-		if ( 
-			appropiateRowForInitialDoubleAdvance
-			&& normalAdvancePossible
-			&& this.isFreeSquareId( squareStartId + valueToAddInitialDoubleAdvance )
-		) {
-			//
-			// 2 squares initial advance. Here it is, of course, impossible to promote this pawn
-			//
-			result.add( squareStartId + valueToAddInitialDoubleAdvance );
+		if ( normalAdvancePossible ) {
+			
+			boolean appropiateRowForInitialDoubleAdvance =
+				( colour == Constants.WHITE_COLOUR )
+				? rowStart == 1
+				: rowStart == 6;
+			if ( appropiateRowForInitialDoubleAdvance ) {
+				
+				int valueToAddInitialDoubleAdvance =
+					( colour == Constants.WHITE_COLOUR )
+					? 16
+					: -16;
+				
+				if ( this.isFreeSquareId( squareStartId + valueToAddInitialDoubleAdvance ) ) {
+					//
+					// 2 squares initial advance. Here it is, of course, impossible to promote this pawn
+					//
+					result.add( squareStartId + valueToAddInitialDoubleAdvance );
+				}
+			}
 		}
 		
 		return result;
@@ -1002,12 +894,7 @@ public class Board extends com.miguel.games.entities.Board {
 				
 				keepOnSearchingThisDirection = false;
 				
-				if ( 
-					! this.isSquareIdOccupiedByPieceByColour(
-						i, 
-						colour
-					) 
-				) {
+				if ( ! this.isSquareIdOccupiedByPieceByColour( i, colour ) ) {
 					//
 					// A square available to capture. We add it
 					//
@@ -1033,12 +920,7 @@ public class Board extends com.miguel.games.entities.Board {
 				
 				keepOnSearchingThisDirection = false;
 				
-				if ( 
-					! this.isSquareIdOccupiedByPieceByColour(
-						i, 
-						colour
-					) 
-				) {
+				if ( ! this.isSquareIdOccupiedByPieceByColour( i, colour ) ) {
 					//
 					// A square available to capture. We add it
 					//
@@ -1397,46 +1279,48 @@ public class Board extends com.miguel.games.entities.Board {
 		return result;
 	}
 	
-	public Piece getPieceByColourAndSquareId(
-		int colour,
-		int squareId
-	) {
-		
-		Piece result = null;
-		boolean found = false;
-		
-		ArrayList<Piece> pieces =
-			( colour == Constants.WHITE_COLOUR ) 
-			? this.whitePieces 
-			: this.blackPieces;
-		
-		int sizePieces =
-			pieces.size();
-		
-		for ( int i = 0; ( ! found ) && i < sizePieces; i++ ) {
-			result = pieces.get( i );
-			found = ( result.getSquareId() == squareId );
-		}
-		
-		if ( ! found ) {
-			result = null;
-		}
-		
-		return result;
-		
+	public Piece getPieceBySquareId( int squareId ) {
+		return this.matrix[squareId];
 	}
+	
+//	public Piece getPieceByColourAndSquareId(
+//		int colour,
+//		int squareId
+//	) {
+//		
+//		Piece result = null;
+//		boolean found = false;
+//		
+//		ArrayList<Piece> pieces =
+//			( colour == Constants.WHITE_COLOUR ) 
+//			? this.whitePieces 
+//			: this.blackPieces;
+//		
+//		int sizePieces =
+//			pieces.size();
+//		
+//		for ( int i = 0; ( ! found ) && i < sizePieces; i++ ) {
+//			result = pieces.get( i );
+//			found = ( result.getSquareId() == squareId );
+//		}
+//		
+//		if ( ! found ) {
+//			result = null;
+//		}
+//		
+//		return result;
+//		
+//	}
 
 	public void removePiece(
 		Piece piece
 	) {
-		
 		if ( piece.getColour() == Constants.WHITE_COLOUR ) {
 			this.whitePieces.remove( piece );
 		}
 		else {
 			this.blackPieces.remove( piece );
 		}
-		
 	}
 
 	public void addPiece( Piece piece ) {
@@ -1491,13 +1375,5 @@ public class Board extends com.miguel.games.entities.Board {
 
 	public void setBlackPieces(ArrayList<Piece> blackPieces) {
 		this.blackPieces = blackPieces;
-	}
-
-	public HashMap<Integer, Boolean> getFreeSquares() {
-		return freeSquares;
-	}
-
-	public void setFreeSquares(HashMap<Integer, Boolean> freeSquares) {
-		this.freeSquares = freeSquares;
 	}
 }

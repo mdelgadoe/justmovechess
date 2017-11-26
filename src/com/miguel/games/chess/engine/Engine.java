@@ -128,7 +128,6 @@ public class Engine extends com.miguel.games.entities.Engine {
 				: Constants.WHITE_COLOUR;
 			
 			if ( position.isCheck( nextTurnColour ) ) {
-				
 				position.setKingChecked( true );
 			}
 			else {
@@ -461,8 +460,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 		//
 		Movement result = null;
 		
-		int colourInTurn =
-			position.getTurn();
+		int colourInTurn = position.getTurn();
 		
 		ArrayList<Movement> movements =
 			position.getLegalMovements( true, principalVariationMovement );
@@ -724,11 +722,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 				// We have to check if it is a mate or a draw, which is something
 				// that our static evaluation method does not perform 
 				//
-				if ( 
-					position.isCheck(
-						position.getTurn()
-					) 
-				) {
+				if ( position.isCheck( position.getTurn() )	) {
 					//
 					// No possible movements, and the king is checked. This is
 					// a victory for the opposite colour. We always return a value
@@ -942,11 +936,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 			// We have to check if it is a mate or a draw, which is something
 			// that our static evaluation method does not perform 
 			//
-			if ( 
-				position.isCheck(
-					position.getTurn()
-				) 
-			) {
+			if ( position.isCheck( position.getTurn() ) ) {
 				//
 				// No possible movements, and the king is checked. This is
 				// a victory for the opposite colour. We always return a value

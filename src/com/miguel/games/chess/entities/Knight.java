@@ -58,7 +58,6 @@ public class Knight extends Piece {
 		Position position,
 		Movement principalVariationMovement
 	) {
-		
 		ArrayList<Movement> result =
 			new ArrayList<Movement>();
 		
@@ -78,11 +77,6 @@ public class Knight extends Piece {
 				this.getSquareId(),
 				this.getColour()
 			);
-		
-		int rivalColour =
-			( this.getColour() == Constants.WHITE_COLOUR )
-			? Constants.BLACK_COLOUR
-			: Constants.WHITE_COLOUR;
 		
 		//
 		// We build each normal movement, we execute it, check 
@@ -125,10 +119,7 @@ public class Knight extends Piece {
 				movement.setCapture( true );
 				
 				movement.setCapturedPiece(
-					board.getPieceByColourAndSquareId(
-						rivalColour,
-						squareId
-					)
+					board.getPieceBySquareId( squareId )
 				);
 				
 				movement.setOrder(

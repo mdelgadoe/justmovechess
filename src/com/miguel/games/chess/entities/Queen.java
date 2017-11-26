@@ -97,11 +97,6 @@ public class Queen extends Piece {
 			bishopMovementsEndSquares
 		);
 		
-		int rivalColour =
-			( this.getColour() == Constants.WHITE_COLOUR )
-			? Constants.BLACK_COLOUR
-			: Constants.WHITE_COLOUR;
-		
 		//
 		// We build each normal movement, we execute it, check 
 		// if it is legal, and if so, we add it to the result.
@@ -143,10 +138,7 @@ public class Queen extends Piece {
 				movement.setCapture( true );
 				
 				movement.setCapturedPiece(
-					board.getPieceByColourAndSquareId(
-						rivalColour,
-						squareId
-					)
+					board.getPieceBySquareId( squareId )
 				);
 				
 				movement.setOrder(
