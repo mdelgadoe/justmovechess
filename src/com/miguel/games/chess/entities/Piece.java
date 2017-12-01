@@ -11,10 +11,10 @@ import java.util.ArrayList;
  */
 public abstract class Piece extends com.miguel.games.entities.Piece {
 	
-	private int colour;
+	private boolean colour;
 	private int squareId;
 	
-	public Piece(int colour, int squareId) {
+	public Piece(boolean colour, int squareId) {
 		super();
 		this.colour = colour;
 		this.squareId = squareId;
@@ -28,10 +28,10 @@ public abstract class Piece extends com.miguel.games.entities.Piece {
 	
 	public abstract String toUCIString();
 	
-	public int getColour() {
+	public boolean getColour() {
 		return colour;
 	}
-	public void setColour(int colour) {
+	public void setColour(boolean colour) {
 		this.colour = colour;
 	}
 	public int getSquareId() {

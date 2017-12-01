@@ -6,7 +6,6 @@ package com.miguel.games.chess.entities;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.miguel.games.chess.common.Constants;
 import com.miguel.games.chess.utils.MovementsComparator;
 
 /**
@@ -21,9 +20,9 @@ public class Position extends com.miguel.games.entities.Position {
 	private Board board = null;
 	
 	//
-	// turn is the colour in turn
+	// turn is the colour in turn. true for white, false for black
 	//
-	private int turn;
+	private boolean turn;
 	
 	//
 	// result is the current result of the chess game
@@ -117,8 +116,7 @@ public class Position extends com.miguel.games.entities.Position {
 		// in turn, check that all of them are legal, and then return them 
 		//
 		
-		if ( this.turn == Constants.WHITE_COLOUR ) {
-			
+		if ( this.turn ) {
 			result =
 				this.getLegalMovements(
 					board.getWhitePieces(),
@@ -206,7 +204,7 @@ public class Position extends com.miguel.games.entities.Position {
 		);
 		
 		
-		if ( this.turn == Constants.WHITE_COLOUR ) {
+		if ( this.turn ) {
 			
 			result.setSquareStartId( 4 );
 			result.setSquareEndId( 6 );
@@ -256,7 +254,7 @@ public class Position extends com.miguel.games.entities.Position {
 			this.blackLongCastleAllowed
 		);
 		
-		if ( this.turn == Constants.WHITE_COLOUR ) {
+		if ( this.turn ) {
 			
 			result.setSquareStartId( 4 );
 			result.setSquareEndId( 2 );
@@ -285,7 +283,7 @@ public class Position extends com.miguel.games.entities.Position {
 		
 		boolean result = false;
 		
-		if ( this.turn == Constants.WHITE_COLOUR ) {
+		if ( this.turn ) {
 			
 			ArrayList<Piece> blackPieces =
 				this.board.getBlackPieces();
@@ -356,7 +354,7 @@ public class Position extends com.miguel.games.entities.Position {
 		
 		boolean result = false;
 		
-		if ( this.turn == Constants.WHITE_COLOUR ) {
+		if ( this.turn ) {
 			
 			ArrayList<Piece> blackPieces =
 				this.board.getBlackPieces();
@@ -424,13 +422,13 @@ public class Position extends com.miguel.games.entities.Position {
 	}
 
 	public boolean isCheck(
-		int kingColour
+		boolean kingColour
 	) {
 		boolean result = false;
 		
 		Board board = this.getBoard();
 		
-		if ( kingColour == Constants.WHITE_COLOUR ) {
+		if ( kingColour ) {
 			//
 			// We check if at least one of the black pieces currently attacks
 			// the white king square
@@ -438,7 +436,7 @@ public class Position extends com.miguel.games.entities.Position {
 			result =
 				this.isAtLeastOnePieceAttackingSquareId(
 					board.getBlackPieces(),
-					board.getKing( Constants.WHITE_COLOUR ).getSquareId()
+					board.getKing( true ).getSquareId()
 				);
 		}
 		else {
@@ -449,7 +447,7 @@ public class Position extends com.miguel.games.entities.Position {
 			result =
 				this.isAtLeastOnePieceAttackingSquareId(
 					board.getWhitePieces(),
-					board.getKing( Constants.BLACK_COLOUR ).getSquareId()
+					board.getKing( false ).getSquareId()
 				);
 		}
 				
@@ -470,19 +468,11 @@ public class Position extends com.miguel.games.entities.Position {
 		return result;
 	}
 	
-	public int changeTurn() {
-		
+	public void changeTurn() {
 		//
-		// Changes turn and return the new colour in turn
+		// Changes turn
 		//
-		if ( this.turn == Constants.WHITE_COLOUR ) {
-			this.turn = Constants.BLACK_COLOUR;
-		}
-		else {
-			this.turn = Constants.WHITE_COLOUR;
-		}
-		
-		return this.turn;
+		this.turn = ! this.turn;
 	}
 	
 	public void executeMovement(
@@ -494,7 +484,7 @@ public class Position extends com.miguel.games.entities.Position {
 		
 		Piece piece = ( Piece )movement.getPiece();
 		
-		int pieceColour = piece.getColour();
+		boolean pieceColour = piece.getColour();
 		
 		//
 		// We mark the movement with the present enPassant, to be able to
@@ -539,7 +529,7 @@ public class Position extends com.miguel.games.entities.Position {
 				// enough to set the enPassantTarget square
 				//
 				this.enPassantTargetId =
-					( pieceColour == Constants.WHITE_COLOUR )
+					( pieceColour )
 					? ( squareEndId - 8 )
 					:( squareEndId + 8 );
 				
@@ -622,7 +612,7 @@ public class Position extends com.miguel.games.entities.Position {
 		//
 		// If black colour has moved, we have to increase our full move counter
 		//
-		if ( pieceColour == Constants.BLACK_COLOUR ) {
+		if ( ! pieceColour ) {
 			
 			this.fullMoveCounter++;
 		}
@@ -640,7 +630,7 @@ public class Position extends com.miguel.games.entities.Position {
 				&& tentativeRook instanceof Rook
 			) {
 				this.whiteShortCastleAllowed =
-					( ! this.board.getKing( Constants.WHITE_COLOUR ).isMoved() )
+					( ! this.board.getKing( true ).isMoved() )
 					&& ( ! ( ( Rook )tentativeRook ).isMoved() );
 			}
 			else {
@@ -656,7 +646,7 @@ public class Position extends com.miguel.games.entities.Position {
 				&& tentativeRook instanceof Rook
 			) {
 				this.whiteLongCastleAllowed =
-					( ! this.board.getKing( Constants.WHITE_COLOUR ).isMoved() )
+					( ! this.board.getKing( true ).isMoved() )
 					&& ( ! ( ( Rook )tentativeRook ).isMoved() );
 			}
 			else {
@@ -672,7 +662,7 @@ public class Position extends com.miguel.games.entities.Position {
 				&& tentativeRook instanceof Rook
 			) {
 				this.blackShortCastleAllowed =
-					( ! this.board.getKing(	Constants.BLACK_COLOUR ).isMoved() )
+					( ! this.board.getKing(	false ).isMoved() )
 					&& ( ! ( ( Rook )tentativeRook ).isMoved() );
 			}
 			else {
@@ -688,7 +678,7 @@ public class Position extends com.miguel.games.entities.Position {
 				&& tentativeRook instanceof Rook
 			) {
 				this.blackLongCastleAllowed =
-					( ! this.board.getKing(	Constants.BLACK_COLOUR ).isMoved() )
+					( ! this.board.getKing(	false ).isMoved() )
 					&& ( ! ( ( Rook )tentativeRook ).isMoved() );
 			}
 			else {
@@ -706,8 +696,6 @@ public class Position extends com.miguel.games.entities.Position {
 		int squareEndId = movement.getSquareEndId();
 		
 		Piece piece = ( Piece )movement.getPiece();
-		
-		int pieceColour = piece.getColour();
 		
 		//
 		// When reversing the movement, we recover the former 
@@ -807,19 +795,19 @@ public class Position extends com.miguel.games.entities.Position {
 		//
 		// If black colour had moved, we have to decrease our full move counter
 		//
-		if ( pieceColour == Constants.BLACK_COLOUR ) {
+		if ( ! piece.getColour() ) {
 			this.fullMoveCounter--;
 		}
 		
 	}
 	
-	public boolean areTwoRooksConnectedOnTheFirstRow( int colour ) {
+	public boolean areTwoRooksConnectedOnTheFirstRow( boolean colour ) {
 		
 		boolean result = false; // By default. It may change below, of course
 		
 		ArrayList<Rook> rooks = this.board.getRooks( colour );
 		
-		int firstRow = ( colour == Constants.WHITE_COLOUR ) ? 0 : 7; 
+		int firstRow = colour ? 0 : 7; 
 		
 		// There has to be two rooks, and they have to be connected on the first row
 		result = 
@@ -844,12 +832,10 @@ public class Position extends com.miguel.games.entities.Position {
 		//
 		int pawnSquareId = pawn.getSquareId();
 		
-		int pawnColour = pawn.getColour();
-		
 		int enPassantTargetSquareId = this.getEnPassantTargetId();
 		
 		int capturedPieceSquareId =
-			( pawnColour == Constants.WHITE_COLOUR )
+			( pawn.getColour() )
 			? enPassantTargetSquareId - 8
 			: enPassantTargetSquareId + 8;
 		
@@ -934,11 +920,11 @@ public class Position extends com.miguel.games.entities.Position {
 		this.board = board;
 	}
 
-	public int getTurn() {
+	public boolean getTurn() {
 		return turn;
 	}
 
-	public void setTurn(int turn) {
+	public void setTurn(boolean turn) {
 		this.turn = turn;
 	}
 

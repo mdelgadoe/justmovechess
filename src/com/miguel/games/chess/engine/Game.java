@@ -47,7 +47,7 @@ public class Game {
 
 	private void playFromPosition(
 		int mode,
-		int humanPlayingColour,
+		boolean humanPlayingColour,
 		boolean dontPayAttentionToAnythingElseAndTestEngineVersusItself
 	) {
 		
@@ -71,7 +71,7 @@ public class Game {
 		
 		while ( position.getResult() == Constants.STILL_PLAYING ) {
 			
-			int turnBeforeMoving = position.getTurn();
+			boolean turnBeforeMoving = position.getTurn();
 			
 			Movement movement = null;
 			if (
@@ -89,7 +89,7 @@ public class Game {
 					dontPayAttentionToAnythingElseAndTestEngineVersusItself
 				);
 			
-			int turnAfterMoving = position.getTurn();
+			boolean turnAfterMoving = position.getTurn();
 			
 			if ( wasPossibleToMove ) {
 				
@@ -136,7 +136,7 @@ public class Game {
 					//
 					position.setKingChecked( true );
 					
-					if ( turnAfterMoving == Constants.WHITE_COLOUR ) {
+					if ( turnAfterMoving ) {
 						
 						position.setWhiteHeuristicValue( - Constants.KING_MATE );
 						position.setBlackHeuristicValue( Constants.KING_MATE );
@@ -252,7 +252,7 @@ public class Game {
 		
 		result.getBoard().initialize();
 		
-		result.setTurn( Constants.WHITE_COLOUR );
+		result.setTurn( true );
 		result.setResult( Constants.STILL_PLAYING );
 		
 		result.setKingChecked( false );
@@ -270,7 +270,7 @@ public class Game {
 		//
 		Engine.evaluatePositionVersionZero(
 			result, 
-			Constants.WHITE_COLOUR
+			true
 		);
 		
 		int initialPositionHeuristicValue =

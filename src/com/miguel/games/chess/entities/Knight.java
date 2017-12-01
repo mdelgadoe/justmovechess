@@ -14,7 +14,7 @@ import com.miguel.games.chess.common.Constants;
  */
 public class Knight extends Piece {
 
-	public Knight(int colour, int squareId) {
+	public Knight(boolean colour, int squareId) {
 		super( colour, squareId );
 	}
 	
@@ -22,7 +22,7 @@ public class Knight extends Piece {
 	public String toString() {
 		
 		String result = 
-			( this.getColour() == Constants.WHITE_COLOUR ) 
+			this.getColour() 
 			? Constants.WHITE_KNIGHT_VISUALIZE
 			: Constants.BLACK_KNIGHT_VISUALIZE;
 

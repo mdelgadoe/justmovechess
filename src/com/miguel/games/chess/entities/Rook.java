@@ -16,7 +16,7 @@ public class Rook extends Piece {
 
 	private boolean moved;
 	
-	public Rook(int colour, int squareId) {
+	public Rook(boolean colour, int squareId) {
 		super( colour, squareId );
 	}
 	
@@ -24,7 +24,7 @@ public class Rook extends Piece {
 	public String toString() {
 		
 		String result = 
-			( this.getColour() == Constants.WHITE_COLOUR ) 
+			this.getColour() 
 			? Constants.WHITE_ROOK_VISUALIZE
 			: Constants.BLACK_ROOK_VISUALIZE;
 

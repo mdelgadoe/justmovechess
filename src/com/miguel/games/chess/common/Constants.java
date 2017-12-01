@@ -10,14 +10,14 @@ package com.miguel.games.chess.common;
 public final class Constants {
 	
 	//
-	// Colours
+	// Colours. We use a boolean: white is true, black is false
 	//
-	public final static int WHITE_COLOUR = 0;
-	public final static int BLACK_COLOUR = 1;
+	// public final static boolean WHITE_COLOUR = true;
+	// public final static boolean BLACK_COLOUR = false;
 	
 	// Human player colour
-	public final static int HUMAN_PLAYING_WHITE = 0;
-	public final static int HUMAN_PLAYING_BLACK = 1;
+	public final static boolean HUMAN_PLAYING_WHITE = true;
+	public final static boolean HUMAN_PLAYING_BLACK = false;
 	
 	//
 	// Pieces visualizing

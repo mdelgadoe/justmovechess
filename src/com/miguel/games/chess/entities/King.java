@@ -17,7 +17,7 @@ public class King extends Piece {
 	private boolean moved;
 	private boolean castled;
 	
-	public King(int colour, int squareId) {
+	public King(boolean colour, int squareId) {
 		super( colour, squareId );
 	}
 
@@ -25,7 +25,7 @@ public class King extends Piece {
 	public String toString() {
 		
 		String result = 
-			( this.getColour() == Constants.WHITE_COLOUR ) 
+			this.getColour() 
 			? Constants.WHITE_KING_VISUALIZE
 			: Constants.BLACK_KING_VISUALIZE;
 

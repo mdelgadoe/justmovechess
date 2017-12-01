@@ -14,7 +14,7 @@ import com.miguel.games.chess.common.Constants;
  */
 public class Pawn extends Piece {
 
-	public Pawn(int colour, int squareId) {
+	public Pawn(boolean colour, int squareId) {
 		super( colour, squareId );
 	}
 	
@@ -22,7 +22,7 @@ public class Pawn extends Piece {
 	public String toString() {
 		
 		String result = 
-			( this.getColour() == Constants.WHITE_COLOUR ) 
+			this.getColour() 
 			? Constants.WHITE_PAWN_VISUALIZE
 			: Constants.BLACK_PAWN_VISUALIZE;
 
@@ -65,7 +65,7 @@ public class Pawn extends Piece {
 		int pawnSquareId =
 			this.getSquareId();
 		
-		int pawnColour = 
+		boolean pawnColour = 
 			this.getColour();
 		
 		int pawnColumn =
@@ -82,15 +82,9 @@ public class Pawn extends Piece {
 		
 		if ( enPassantTargetId != 0 ) {
 			
-			int addValueLeftDiagonalAdvance =
-				( pawnColour == Constants.WHITE_COLOUR )
-				? 7
-				: -9;
+			int addValueLeftDiagonalAdvance = ( pawnColour ? 7 : -9 );
 			
-			int addValueRightDiagonalAdvance =
-				( pawnColour == Constants.WHITE_COLOUR )
-				? 9
-				: -7;
+			int addValueRightDiagonalAdvance = ( pawnColour ? 9	: -7 );
 			
 			if (
 				(

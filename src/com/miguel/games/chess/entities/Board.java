@@ -44,57 +44,57 @@ public class Board extends com.miguel.games.entities.Board {
 		whitePieces =
 			new ArrayList<Piece>();
 		
-		King e1King = new King( Constants.WHITE_COLOUR, 4 );
+		King e1King = new King( true, 4 );
 		whitePieces.add( 0, e1King );
 		matrix[4] = e1King;
 		
-		Pawn a2Pawn = new Pawn( Constants.WHITE_COLOUR, 8 );
+		Pawn a2Pawn = new Pawn( true, 8 );
 		whitePieces.add( 1, a2Pawn );
 		matrix[8] = a2Pawn;
-		Pawn b2Pawn = new Pawn( Constants.WHITE_COLOUR, 9 );
+		Pawn b2Pawn = new Pawn( true, 9 );
 		whitePieces.add( 2, b2Pawn );
 		matrix[9] = b2Pawn;
-		Pawn c2Pawn = new Pawn( Constants.WHITE_COLOUR, 10 );
+		Pawn c2Pawn = new Pawn( true, 10 );
 		whitePieces.add( 2, c2Pawn );
 		matrix[10] = c2Pawn;
-		Pawn d2Pawn = new Pawn( Constants.WHITE_COLOUR, 11 );
+		Pawn d2Pawn = new Pawn( true, 11 );
 		whitePieces.add( 4, d2Pawn );
 		matrix[11] = d2Pawn;
-		Pawn e2Pawn = new Pawn( Constants.WHITE_COLOUR, 12 );
+		Pawn e2Pawn = new Pawn( true, 12 );
 		whitePieces.add( 5, e2Pawn );
 		matrix[12] = e2Pawn;
-		Pawn f2Pawn = new Pawn( Constants.WHITE_COLOUR, 13 );
+		Pawn f2Pawn = new Pawn( true, 13 );
 		whitePieces.add( 6, f2Pawn );
 		matrix[13] = f2Pawn;
-		Pawn g2Pawn = new Pawn( Constants.WHITE_COLOUR, 14 );
+		Pawn g2Pawn = new Pawn( true, 14 );
 		whitePieces.add( 7, g2Pawn );
 		matrix[14] = g2Pawn;
-		Pawn h2Pawn = new Pawn( Constants.WHITE_COLOUR, 15 );
+		Pawn h2Pawn = new Pawn( true, 15 );
 		whitePieces.add( 8, h2Pawn );
 		matrix[15] = h2Pawn;
 		
-		Knight b1Knight = new Knight( Constants.WHITE_COLOUR, 1 );
+		Knight b1Knight = new Knight( true, 1 );
 		whitePieces.add( 9, b1Knight );
 		matrix[1] = b1Knight;
-		Knight g1Pawn = new Knight( Constants.WHITE_COLOUR, 6 );
+		Knight g1Pawn = new Knight( true, 6 );
 		whitePieces.add( 10, g1Pawn );
 		matrix[6] = g1Pawn;
 		
-		Bishop c1Bishop = new Bishop( Constants.WHITE_COLOUR, 2 );
+		Bishop c1Bishop = new Bishop( true, 2 );
 		whitePieces.add( 11, c1Bishop );
 		matrix[2] = c1Bishop;
-		Bishop f1Bishop = new Bishop( Constants.WHITE_COLOUR, 5 );
+		Bishop f1Bishop = new Bishop( true, 5 );
 		whitePieces.add( 12, f1Bishop );
 		matrix[5] = f1Bishop;
 		
-		Rook a1Rook = new Rook( Constants.WHITE_COLOUR, 0 );
+		Rook a1Rook = new Rook( true, 0 );
 		whitePieces.add( 13, a1Rook );
 		matrix[0] = a1Rook;
-		Rook h1Rook = new Rook( Constants.WHITE_COLOUR, 7 );
+		Rook h1Rook = new Rook( true, 7 );
 		whitePieces.add( 14, h1Rook );
 		matrix[7] = h1Rook;
 		
-		Queen d1Queen = new Queen( Constants.WHITE_COLOUR, 3 );
+		Queen d1Queen = new Queen( true, 3 );
 		whitePieces.add( 15, d1Queen );
 		matrix[3] = d1Queen;
 		
@@ -105,57 +105,57 @@ public class Board extends com.miguel.games.entities.Board {
 		blackPieces =
 			new ArrayList<Piece>();
 		
-		King e8King = new King( Constants.BLACK_COLOUR, 60 );
+		King e8King = new King( false, 60 );
 		blackPieces.add( 0, e8King );
 		matrix[60] = e8King;
 		
-		Pawn a7Pawn = new Pawn( Constants.BLACK_COLOUR, 48 );
+		Pawn a7Pawn = new Pawn( false, 48 );
 		blackPieces.add( 1, a7Pawn );
 		matrix[48] = a7Pawn;
-		Pawn b7Pawn = new Pawn( Constants.BLACK_COLOUR, 49 );
+		Pawn b7Pawn = new Pawn( false, 49 );
 		blackPieces.add( 2, b7Pawn );
 		matrix[49] = b7Pawn;
-		Pawn c7Pawn = new Pawn( Constants.BLACK_COLOUR, 50 );
+		Pawn c7Pawn = new Pawn( false, 50 );
 		blackPieces.add( 3, c7Pawn );
 		matrix[50] = c7Pawn;
-		Pawn d7Pawn = new Pawn( Constants.BLACK_COLOUR, 51 );
+		Pawn d7Pawn = new Pawn( false, 51 );
 		blackPieces.add( 4, d7Pawn );
 		matrix[51] = d7Pawn;
-		Pawn e7Pawn = new Pawn( Constants.BLACK_COLOUR, 52 );
+		Pawn e7Pawn = new Pawn( false, 52 );
 		blackPieces.add( 5, e7Pawn );
 		matrix[52] = e7Pawn;
-		Pawn f7Pawn = new Pawn( Constants.BLACK_COLOUR, 53 );
+		Pawn f7Pawn = new Pawn( false, 53 );
 		blackPieces.add( 6, f7Pawn );
 		matrix[53] = f7Pawn;
-		Pawn g7Pawn = new Pawn( Constants.BLACK_COLOUR, 54 );
+		Pawn g7Pawn = new Pawn( false, 54 );
 		blackPieces.add( 7, g7Pawn );
 		matrix[54] = g7Pawn;
-		Pawn h7Pawn = new Pawn( Constants.BLACK_COLOUR, 55 );
+		Pawn h7Pawn = new Pawn( false, 55 );
 		blackPieces.add( 8, h7Pawn );
 		matrix[55] = h7Pawn;
 		
-		Knight b8Knight = new Knight( Constants.BLACK_COLOUR, 57 );
+		Knight b8Knight = new Knight( false, 57 );
 		blackPieces.add( 9, b8Knight );
 		matrix[57] = b8Knight;
-		Knight g8Knight = new Knight( Constants.BLACK_COLOUR, 62 );
+		Knight g8Knight = new Knight( false, 62 );
 		blackPieces.add( 10, g8Knight );
 		matrix[62] = g8Knight;
 		
-		Bishop c8Bishop = new Bishop( Constants.BLACK_COLOUR, 58 );
+		Bishop c8Bishop = new Bishop( false, 58 );
 		blackPieces.add( 11, c8Bishop );
 		matrix[58] = c8Bishop;
-		Bishop f8Bishop = new Bishop( Constants.BLACK_COLOUR, 61 );
+		Bishop f8Bishop = new Bishop( false, 61 );
 		blackPieces.add( 12, f8Bishop );
 		matrix[61] = f8Bishop;
 		
-		Rook a8Rook = new Rook( Constants.BLACK_COLOUR, 56 );
+		Rook a8Rook = new Rook( false, 56 );
 		blackPieces.add( 13, a8Rook );
 		matrix[56] = a8Rook;
-		Rook h8Rook = new Rook( Constants.BLACK_COLOUR, 63 );
+		Rook h8Rook = new Rook( false, 63 );
 		blackPieces.add( 14, h8Rook );
 		matrix[63] = h8Rook;
 		
-		Queen d8Queen = new Queen( Constants.BLACK_COLOUR, 59 );
+		Queen d8Queen = new Queen( false, 59 );
 		blackPieces.add( 15, d8Queen );
 		matrix[59] = d8Queen;
 	}
@@ -285,23 +285,16 @@ public class Board extends com.miguel.games.entities.Board {
 	}
 	
 	public King getKing(
-		int colour
+		boolean colour
 	) {
 		//
 		// The King is always the first piece in the pieces array list
 		//
-		King result;
-		
-		if ( colour == Constants.WHITE_COLOUR ) {
-			result =
-				( King )( this.whitePieces.get( 0 ) );
-		}
-		else {
-			result =
-				( King )( this.blackPieces.get( 0 ) );
-		}
-		
-		return result;
+		return (
+			colour ?
+			( King )( this.whitePieces.get( 0 ) ) :
+			( King )( this.blackPieces.get( 0 ) )
+		);
 	}
 
 	public boolean isPieceAttackingAnyOfTheFourCentralSquares(
@@ -325,11 +318,11 @@ public class Board extends com.miguel.games.entities.Board {
 	public boolean areDiagonalAdjacentSquaresIdsWithDirection(
 		int squareStartId,
 		int squareEndId,
-		int colour
+		boolean colour
 	) {
 		boolean result = false;
 		
-		if ( colour == Constants.WHITE_COLOUR ) {
+		if ( colour ) {
 			
 			result = 
 				squareEndId / 8 - squareStartId / 8 == 1
@@ -470,7 +463,7 @@ public class Board extends com.miguel.games.entities.Board {
 	
 	public boolean isSquareIdOccupiedByPieceByColour(
 		int squareId,
-		int colour
+		boolean colour
 	) {
 		return (
 			this.matrix[squareId] != null
@@ -480,7 +473,7 @@ public class Board extends com.miguel.games.entities.Board {
 	
 	public ArrayList<Integer> getKingMovementEndSquaresIds(
 		int squareStartId,
-		int colour
+		boolean colour
 	) {
 		
 		ArrayList<Integer> result =
@@ -580,7 +573,7 @@ public class Board extends com.miguel.games.entities.Board {
 
 	public ArrayList<Integer> getPawnMovementEndSquaresIds(
 		int squareStartId, 
-		int colour
+		boolean colour
 	) {
 		ArrayList<Integer> result =
 			new ArrayList<Integer>();
@@ -590,7 +583,7 @@ public class Board extends com.miguel.games.entities.Board {
 		
 		boolean rowStartAppropiateToPromote;
 		
-		if ( colour == Constants.WHITE_COLOUR ) {
+		if ( colour ) {
 			rowStartAppropiateToPromote =
 				rowStart == 6;
 		}
@@ -599,20 +592,11 @@ public class Board extends com.miguel.games.entities.Board {
 				rowStart == 1;
 		}
 		
-		int rivalColour =
-			( colour == Constants.WHITE_COLOUR )
-			? Constants.BLACK_COLOUR
-			: Constants.WHITE_COLOUR;
+		boolean rivalColour = ! colour;
 		
-		int valueToAddLeftSide =
-			( colour == Constants.WHITE_COLOUR )
-			? 7
-			: -9;
+		int valueToAddLeftSide = colour ? 7	: -9;
 		
-		int valueToAddRightSide =
-			( colour == Constants.WHITE_COLOUR )
-			? 9
-			: -7;
+		int valueToAddRightSide = colour ? 9 : -7;
 		
 		//
 		// A pawn can capture another piece in the two diagonal 
@@ -671,10 +655,7 @@ public class Board extends com.miguel.games.entities.Board {
 		//
 		// Then we try the normal one square advance
 		//
-		int valueToAddNormalAdvance =
-			( colour == Constants.WHITE_COLOUR )
-			? 8
-			: -8;
+		int valueToAddNormalAdvance = ( colour ? 8 : -8 );
 		
 		boolean normalAdvancePossible = false;
 		
@@ -704,15 +685,12 @@ public class Board extends com.miguel.games.entities.Board {
 		if ( normalAdvancePossible ) {
 			
 			boolean appropiateRowForInitialDoubleAdvance =
-				( colour == Constants.WHITE_COLOUR )
+				colour
 				? rowStart == 1
 				: rowStart == 6;
 			if ( appropiateRowForInitialDoubleAdvance ) {
 				
-				int valueToAddInitialDoubleAdvance =
-					( colour == Constants.WHITE_COLOUR )
-					? 16
-					: -16;
+				int valueToAddInitialDoubleAdvance = ( colour ? 16 : -16 );
 				
 				if ( this.isFreeSquareId( squareStartId + valueToAddInitialDoubleAdvance ) ) {
 					//
@@ -728,7 +706,7 @@ public class Board extends com.miguel.games.entities.Board {
 	
 	public ArrayList<Integer> getRookMovementEndSquaresIds(
 		int squareStartId, 
-		int colour
+		boolean colour
 	) {
 		ArrayList<Integer> result =
 			new ArrayList<Integer>();
@@ -867,7 +845,7 @@ public class Board extends com.miguel.games.entities.Board {
 	
 	public ArrayList<Integer> getBishopMovementEndSquaresIds(
 		int squareStartId, 
-		int colour
+		boolean colour
 	) {
 		ArrayList<Integer> result =
 			new ArrayList<Integer>();
@@ -996,7 +974,7 @@ public class Board extends com.miguel.games.entities.Board {
 	
 	public ArrayList<Integer> getKnightMovementEndSquaresIds(
 		int squareStartId, 
-		int colour
+		boolean colour
 	) {
 		ArrayList<Integer> result =
 			new ArrayList<Integer>();
@@ -1151,11 +1129,7 @@ public class Board extends com.miguel.games.entities.Board {
 	public boolean thereIsASameColourPawnInTheSameColumn( Piece piece ) {
 		boolean result = false;  // By default. It can change below, of course
 		
-		int colour = piece.getColour();
-		ArrayList<Piece> pieces =
-			( colour == Constants.WHITE_COLOUR ) 
-			? this.whitePieces 
-			: this.blackPieces;
+		ArrayList<Piece> pieces = ( piece.getColour() ? this.whitePieces : this.blackPieces );
 		
 		int sizePieces = pieces.size();
 		int pieceColumn = piece.getSquareId() % 8;
@@ -1174,11 +1148,7 @@ public class Board extends com.miguel.games.entities.Board {
 	public boolean isAnIsolatedPawn( Pawn pawn ) {
 		boolean result = true;  // By default. It can change below, of course
 		
-		int colour = pawn.getColour();
-		ArrayList<Piece> pieces =
-			( colour == Constants.WHITE_COLOUR ) 
-			? this.whitePieces 
-			: this.blackPieces;
+		ArrayList<Piece> pieces = ( pawn.getColour() ? this.whitePieces	: this.blackPieces );
 		
 		int sizePieces = pieces.size();
 		int pawnColumn = pawn.getSquareId() % 8;
@@ -1221,11 +1191,10 @@ public class Board extends com.miguel.games.entities.Board {
 	public boolean isCandidateToBePassedPawn( Pawn pawn ) {
 		boolean result = true;  // By default, until we find a rival pawn which could be able to stop our pawn
 		
-		int colour = pawn.getColour();
 		int pawnColumn = pawn.getSquareId() % 8;
 		int pawnRow = pawn.getSquareId() / 8;
 		
-		if ( colour == Constants.WHITE_COLOUR ) {
+		if ( pawn.getColour() ) {
 			// It is a white pawn, so we will have a look at black pawns
 			ArrayList<Piece> pieces = this.blackPieces;
 			int sizePieces = pieces.size();
@@ -1283,39 +1252,10 @@ public class Board extends com.miguel.games.entities.Board {
 		return this.matrix[squareId];
 	}
 	
-//	public Piece getPieceByColourAndSquareId(
-//		int colour,
-//		int squareId
-//	) {
-//		
-//		Piece result = null;
-//		boolean found = false;
-//		
-//		ArrayList<Piece> pieces =
-//			( colour == Constants.WHITE_COLOUR ) 
-//			? this.whitePieces 
-//			: this.blackPieces;
-//		
-//		int sizePieces =
-//			pieces.size();
-//		
-//		for ( int i = 0; ( ! found ) && i < sizePieces; i++ ) {
-//			result = pieces.get( i );
-//			found = ( result.getSquareId() == squareId );
-//		}
-//		
-//		if ( ! found ) {
-//			result = null;
-//		}
-//		
-//		return result;
-//		
-//	}
-
 	public void removePiece(
 		Piece piece
 	) {
-		if ( piece.getColour() == Constants.WHITE_COLOUR ) {
+		if ( piece.getColour() ) {
 			this.whitePieces.remove( piece );
 		}
 		else {
@@ -1324,7 +1264,7 @@ public class Board extends com.miguel.games.entities.Board {
 	}
 
 	public void addPiece( Piece piece ) {
-		if ( piece.getColour() == Constants.WHITE_COLOUR ) {
+		if ( piece.getColour() ) {
 			this.whitePieces.add( piece );
 		}
 		else {
@@ -1333,7 +1273,7 @@ public class Board extends com.miguel.games.entities.Board {
 	}
 	
 	public void addPiece( Piece piece, int index ) {
-		if ( piece.getColour() == Constants.WHITE_COLOUR ) {
+		if ( piece.getColour() ) {
 			this.whitePieces.add( index, piece );
 		}
 		else {
@@ -1341,14 +1281,11 @@ public class Board extends com.miguel.games.entities.Board {
 		}
 	}
 	
-	public ArrayList<Rook> getRooks( int colour ) {
+	public ArrayList<Rook> getRooks( boolean colour ) {
 		
 		ArrayList<Rook> result = new ArrayList<Rook>();
 		
-		ArrayList<Piece> colourPieces =
-			( colour == Constants.WHITE_COLOUR )
-			? this.getWhitePieces()
-			: this.getBlackPieces() ;
+		ArrayList<Piece> colourPieces = ( colour ? this.getWhitePieces(): this.getBlackPieces() );
 		
 		// There might be one, two, three or whaveter number of rooks on the board, because of promotions...	
 			

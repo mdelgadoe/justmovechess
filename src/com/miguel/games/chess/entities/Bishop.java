@@ -14,7 +14,7 @@ import com.miguel.games.chess.common.Constants;
  */
 public class Bishop extends Piece {
 
-	public Bishop(int colour, int squareId) {
+	public Bishop(boolean colour, int squareId) {
 		super( colour, squareId );
 	}
 	
@@ -22,7 +22,7 @@ public class Bishop extends Piece {
 	public String toString() {
 		
 		String result = 
-			( this.getColour() == Constants.WHITE_COLOUR ) 
+			this.getColour() 
 			? Constants.WHITE_BISHOP_VISUALIZE
 			: Constants.BLACK_BISHOP_VISUALIZE;
 

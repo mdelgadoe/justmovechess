@@ -43,8 +43,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 		//
 		boolean result = true;
 		
-		int colourInTurn =
-			position.getTurn();
+		boolean colourInTurn = position.getTurn();
 		
 		//
 		// Iterative deepening
@@ -122,12 +121,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 			// We check if after the movement, there is a check, to inform
 			// the user, or the GUI
 			//
-			int nextTurnColour =
-				( colourInTurn == Constants.WHITE_COLOUR )
-				? Constants.BLACK_COLOUR
-				: Constants.WHITE_COLOUR;
-			
-			if ( position.isCheck( nextTurnColour ) ) {
+			if ( position.isCheck( ! colourInTurn ) ) {
 				position.setKingChecked( true );
 			}
 			else {
@@ -222,8 +216,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 		
 		Movement result = null;
 		
-		int colourInTurn =
-			position.getTurn();
+		boolean colourInTurn = position.getTurn();
 		
 		ArrayList<Movement> movements =
 			position.getLegalMovements( true, null );
@@ -306,7 +299,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 	private static int minimaxSearchNodeValue(
 		Position position, 
 		int plyLevel,
-		int colour,
+		boolean colour,
 		boolean isMaxNode,
 		int originalPlyLevel
 	) {
@@ -460,7 +453,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 		//
 		Movement result = null;
 		
-		int colourInTurn = position.getTurn();
+		boolean colourInTurn = position.getTurn();
 		
 		ArrayList<Movement> movements =
 			position.getLegalMovements( true, principalVariationMovement );
@@ -570,7 +563,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 	private static int minimaxAlfaBetaSearchNodeValue(
 		Position position, 
 		int plyLevel,
-		int colour,
+		boolean colour,
 		int alfa,
 		int beta,
 		boolean isMaxNode,
@@ -754,7 +747,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 	private static int minimaxAlfaBetaQuiescencySearchNodeValue(
 		Position position,
 		int plyLevel,
-		int colour,
+		boolean colour,
 		int alfa, 
 		int beta,
 		boolean isMaxNode,
@@ -966,7 +959,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 	
 	public static int evaluatePositionVersionZero(
 		Position position,
-		int colour
+		boolean colour
 	) {
 		
 		//
@@ -1044,7 +1037,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 			position.setWhiteHeuristicValue( whiteHeuristicValue );
 			position.setBlackHeuristicValue( blackHeuristicValue );
 			
-			if ( colour == Constants.WHITE_COLOUR ) {
+			if ( colour ) {
 				result = whiteHeuristicValue - blackHeuristicValue;
 			}
 			else {
@@ -1086,7 +1079,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 
 	public static int evaluatePositionVersionOne(
 		Position position,
-		int colour,
+		boolean colour,
 		int plyLevel,
 		int originalPlyLevel
 	) {
@@ -1298,7 +1291,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 					else if (
 						fullMoveCounter >= Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER
 						&& board.isPieceOnTheIesimRow( piece, 6 )
-						&& board.isPieceOnTheIesimRow( board.getKing( Constants.BLACK_COLOUR ), 7 )
+						&& board.isPieceOnTheIesimRow( board.getKing( false ), 7 )
 					) {
 						whiteHeuristicValue =
 							whiteHeuristicValue + Constants.ROOK_ON_ITS_SEVENTH_ROW_AND_RIVAL_KING_ON_THE_EIGHTH_ROW;
@@ -1391,7 +1384,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 			// because the king would have to be moved
 			//
 			if (
-				position.isCheck( Constants.BLACK_COLOUR )
+				position.isCheck( false )
 			) {
 				if ( fullMoveCounter > Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER ) {
 					whiteHeuristicValue = whiteHeuristicValue + Constants.RIVAL_KING_CHECKED_ENDING;
@@ -1407,7 +1400,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 			//
 			if (
 				fullMoveCounter <= Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER
-				&& position.areTwoRooksConnectedOnTheFirstRow( Constants.WHITE_COLOUR )
+				&& position.areTwoRooksConnectedOnTheFirstRow( true )
 			) {
 				whiteHeuristicValue = whiteHeuristicValue + Constants.ROOKS_CONNECTED_ON_THE_FIRST_ROW;
 			}
@@ -1580,7 +1573,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 					else if (
 						fullMoveCounter >= Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER
 						&& board.isPieceOnTheIesimRow( piece, 1 )
-						&& board.isPieceOnTheIesimRow( board.getKing( Constants.WHITE_COLOUR ), 0 )
+						&& board.isPieceOnTheIesimRow( board.getKing( true ), 0 )
 					) {
 						blackHeuristicValue =
 							blackHeuristicValue + Constants.ROOK_ON_ITS_SEVENTH_ROW_AND_RIVAL_KING_ON_THE_EIGHTH_ROW;
@@ -1672,7 +1665,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 			// because the king would have to be moved
 			//
 			if (
-				position.isCheck( Constants.WHITE_COLOUR )
+				position.isCheck( true )
 			) {
 				if ( fullMoveCounter > Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER ) {
 					blackHeuristicValue = blackHeuristicValue + Constants.RIVAL_KING_CHECKED_ENDING;
@@ -1688,7 +1681,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 			//
 			if (
 				fullMoveCounter <= Constants.MIDDLE_GAME_LIMIT_FULL_MOVE_COUNTER
-				&& position.areTwoRooksConnectedOnTheFirstRow( Constants.BLACK_COLOUR )
+				&& position.areTwoRooksConnectedOnTheFirstRow( false )
 			) {
 				blackHeuristicValue = blackHeuristicValue + Constants.ROOKS_CONNECTED_ON_THE_FIRST_ROW;
 			}
@@ -1705,7 +1698,7 @@ public class Engine extends com.miguel.games.entities.Engine {
 			// And we calculate a result, depending on the colour point
 			// of view
 			//
-			if ( colour == Constants.WHITE_COLOUR ) {
+			if ( colour ) {
 				result = whiteHeuristicValue - blackHeuristicValue;
 			}
 			else {

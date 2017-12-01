@@ -57,17 +57,7 @@ public class FenUtilities {
 		//
 		// Turn
 		// 
-		int turn;
-		
-		if ( turnString.equals( "w" ) ) {
-			
-			turn = Constants.WHITE_COLOUR;
-		}
-		else {
-			
-			turn = Constants.BLACK_COLOUR;
-		}
-		
+		boolean turn = ( turnString.equals( "w" ) ) ? true : false;
 		result.setTurn( turn );
 		
 		//
@@ -164,40 +154,40 @@ public class FenUtilities {
 				else {
 					switch ( c ) {
 						case 'K':
-							whitePieces.add( 0, new King( Constants.WHITE_COLOUR, squareId ) );
+							whitePieces.add( 0, new King( true, squareId ) );
 							break;
 						case 'Q':
-							whitePieces.add( new Queen( Constants.WHITE_COLOUR, squareId ) );
+							whitePieces.add( new Queen( true, squareId ) );
 							break;
 						case 'R':
-							whitePieces.add( new Rook( Constants.WHITE_COLOUR, squareId ) );
+							whitePieces.add( new Rook( true, squareId ) );
 							break;
 						case 'B':
-							whitePieces.add( new Bishop( Constants.WHITE_COLOUR, squareId ) );
+							whitePieces.add( new Bishop( true, squareId ) );
 							break;
 						case 'N':
-							whitePieces.add( new Knight( Constants.WHITE_COLOUR, squareId ) );
+							whitePieces.add( new Knight( true, squareId ) );
 							break;
 						case 'P':
-							whitePieces.add( new Pawn( Constants.WHITE_COLOUR, squareId ) );
+							whitePieces.add( new Pawn( true, squareId ) );
 							break;
 						case 'k':
-							blackPieces.add( 0, new King( Constants.BLACK_COLOUR, squareId ) );
+							blackPieces.add( 0, new King( false, squareId ) );
 							break;
 						case 'q':
-							blackPieces.add( new Queen( Constants.BLACK_COLOUR, squareId ) );
+							blackPieces.add( new Queen( false, squareId ) );
 							break;
 						case 'r':
-							blackPieces.add( new Rook( Constants.BLACK_COLOUR, squareId ) );
+							blackPieces.add( new Rook( false, squareId ) );
 							break;
 						case 'b':
-							blackPieces.add( new Bishop( Constants.BLACK_COLOUR, squareId ) );
+							blackPieces.add( new Bishop( false, squareId ) );
 							break;
 						case 'n':
-							blackPieces.add( new Knight( Constants.BLACK_COLOUR, squareId ) );
+							blackPieces.add( new Knight( false, squareId ) );
 							break;
 						case 'p':
-							blackPieces.add( new Pawn( Constants.BLACK_COLOUR, squareId ) );
+							blackPieces.add( new Pawn( false, squareId ) );
 							break;
 					}
 					
@@ -227,19 +217,15 @@ public class FenUtilities {
 		//
 		// King checked or not
 		//
-		if ( result.getTurn() == Constants.WHITE_COLOUR ) {
+		if ( result.getTurn() ) {
 			
 			result.setKingChecked(
-				result.isCheck(
-					Constants.WHITE_COLOUR
-				)
+				result.isCheck(	true )
 			);
 		}
 		else {
 			result.setKingChecked(
-				result.isCheck(
-					Constants.BLACK_COLOUR
-				)
+				result.isCheck(	false )
 			);
 		}
 		
